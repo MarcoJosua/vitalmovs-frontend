@@ -1,0 +1,140 @@
+<div class="planes-container">
+
+  <div class="page-header">
+    <h1>
+      {{ rol === 'ROLE_FISIOTERAPEUTA' ? 'Gestión de planes de rehabilitación' : 'Mis planes de rehabilitación' }}
+    </h1>
+
+    <p>
+      Consulta los planes registrados y accede a la rutina semanal o al progreso del tratamiento.
+    </p>
+
+    <div class="debug-box">
+      <p><strong>Rol:</strong> {{ rol }}</p>
+      <p><strong>Planes cargados:</strong> {{ planes.length }}</p>
+      <p  *ngIf="rol === 'ROLE_FISIOTERAPEUTA'"><strong>Asignaciones aceptadas sin plan:</strong> {{ asignacionesAceptadasSinPlan.length }}</p>
+    </div>
+  </div>
+
+  <!-- SOLO FISIOTERAPEUTA -->
+  <section class="section-block" *ngIf="rol === 'ROLE_FISIOTERAPEUTA'">
+
+    <h2>Pacientes aceptados sin plan</h2>
+
+    <p class="empty-message" *ngIf="asignacionesAceptadasSinPlan.length === 0">
+      No hay pacientes aceptados pendientes de plan.
+    </p>
+
+    <div class="cards-grid">
+
+      <div class="custom-card" *ngFor="let asignacion of asignacionesAceptadasSinPlan">
+
+        <h3>Paciente: {{ asignacion.nombrePaciente }}</h3>
+
+        <p>
+          <strong>Mensaje:</strong>
+          {{ asignacion.mensaje }}
+        </p>
+
+        <p>
+          <strong>Fecha:</strong>
+          {{ asignacion.fecha }}
+        </p>
+
+        <p>
+          <strong>Estado de asignación:</strong>
+          {{ asignacion.estado }}
+        </p>
+
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="crearPlan(asignacion.id)">
+          Crear plan
+        </button>
+
+        
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- PLANES -->
+  <section class="section-block">
+
+    <h2>
+      {{ rol === 'ROLE_FISIOTERAPEUTA' ? 'Planes de rehabilitación creados' : 'Planes asignados' }}
+    </h2>
+
+    <p class="empty-message" *ngIf="planes.length === 0">
+      No hay planes de rehabilitación registrados.
+    </p>
+
+    <div class="cards-grid">
+
+      <div class="custom-card" *ngFor="let plan of planes">
+
+        <h3>{{ plan.nombre }}</h3>
+
+        <p>
+          <strong>Descripción:</strong>
+          {{ plan.descripcion }}
+        </p>
+
+        <p>
+          <strong>Estado del plan:</strong>
+          {{ plan.estado }}
+        </p>
+
+        <p>
+          <strong>Fecha de inicio:</strong>
+          {{ plan.fecha_inicio }}
+        </p>
+
+        <p>
+          <strong>Fecha de fin:</strong>
+          {{ plan.fecha_fin }}
+        </p>
+        <div class="actions">
+
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="verRutina(plan.id)">
+            Ver rutina semanal
+          </button>
+
+          <button
+            mat-button
+            color="accent"
+            (click)="verProgreso(plan.id)">
+            Ver progreso
+          </button>
+
+          <button
+            mat-button
+            color="warn"
+            *ngIf="rol === 'ROLE_FISIOTERAPEUTA' && plan.estado === 'ACTIVO'"
+            (click)="cancelarPlan(plan)">
+            Cancelar plan
+          </button>
+
+          <button
+            mat-button
+            color="primary"
+            *ngIf="fisioterapeutaId !== 0"
+            (click)="editarPlan(plan.id)">
+            Editar plan
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

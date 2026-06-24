@@ -13,8 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
+import { MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -32,7 +31,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   exports:[
     MatTableModule,
@@ -47,7 +47,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ]
 })
 export class MaterialModule {}

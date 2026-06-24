@@ -1,0 +1,84 @@
+<div class="add-planes-container">
+
+  <div>
+    <h2>Agregar plan de rehabilitación</h2>
+    <p>Asignación seleccionada: {{ asignacionId }}</p>
+  </div>
+
+  <form [formGroup]="planForm">
+
+    <mat-form-field>
+      <mat-label>Nombre del plan</mat-label>
+      <input matInput formControlName="nombre">
+
+      <span style="color: red;" *ngIf="planForm.get('nombre')?.hasError('required')">
+        Campo requerido
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion"></textarea>
+
+      <span style="color: red;" *ngIf="planForm.get('descripcion')?.hasError('required')">
+        Campo requerido
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Fecha de inicio</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerInicio"
+        formControlName="fecha_inicio"
+        [min]="fechaHoy">
+
+      <mat-hint>MM/DD/YYYY</mat-hint>
+
+      <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+
+      <span style="color: red;" *ngIf="planForm.get('fecha_inicio')?.hasError('required')">
+        Campo requerido
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Fecha de fin</mat-label>
+      <input
+        matInput
+        [matDatepicker]="pickerFin"
+        formControlName="fecha_fin"
+        [min]="planForm.get('fecha_inicio')?.value || fechaHoy">
+
+      <mat-hint>MM/DD/YYYY</mat-hint>
+
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+
+      <span style="color: red;" *ngIf="planForm.get('fecha_fin')?.hasError('required')">
+        Campo requerido
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <button mat-raised-button color="primary" type="button" (click)="guardarPlan()">
+      Grabar
+    </button>
+
+    &nbsp;&nbsp;&nbsp;
+
+    <button mat-button color="warn" type="button" (click)="cancelar()">
+      Cancelar
+    </button>
+
+  </form>
+
+</div>
