@@ -1,1 +1,42 @@
-<p>cabecera works!</p>
+<mat-toolbar class="general">
+
+  <div class="brand">
+    <div class="logo-box">
+      <img src="logo-vitalmovs.png" alt="Logo VitalMovs">
+    </div>
+
+    <div class="brand-text">
+      <h1>VitalMovs</h1>
+    </div>
+  </div>
+
+  <span class="example-spacer"></span>
+
+  <nav class="nav-links">
+
+    <a routerLink="/home">
+      <mat-icon>home</mat-icon>
+      <span>Inicio</span>
+    </a>
+
+    <a routerLink="/plan-rehabilitacion/list-planes">
+      <mat-icon>assignment</mat-icon>
+      <span>Planes</span>
+    </a>
+
+    <a routerLink="/asignacion/list-asignaciones">
+      <mat-icon>groups</mat-icon>
+      <span>Foro</span>
+    </a>
+  </nav>
+
+  &nbsp;
+    &nbsp;
+    &nbsp;
+
+  <a routerLink="/login" class="logout">
+      <mat-icon>logout</mat-icon>
+  </a>
+
+
+</mat-toolbar>

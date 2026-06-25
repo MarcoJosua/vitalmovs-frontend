@@ -75,8 +75,8 @@ export class ListPlanes {
     this.router.navigate(['/plan-rehabilitacion', planId, 'plan-ejercicio']);
   }
 
-  verProgreso(planId: number): void {
-    this.router.navigate(['/planes', planId, 'progreso']);
+  verEstadisticas(planId: number): void {
+    this.router.navigate(['/plan-rehabilitacion', planId, 'estadistica']);
   }
 
   editarPlan(planId: number): void {

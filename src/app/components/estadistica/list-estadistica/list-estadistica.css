@@ -1,0 +1,358 @@
+.dashboard-container {
+  padding: 14px;
+  background-color: #f3f6fb;
+  min-height: 100vh;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #111827;
+  font-weight: 800;
+}
+
+.dashboard-header p {
+  margin: 3px 0 0 0;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.empty-message {
+  background-color: #ffffff;
+  color: #607d8b;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 10px;
+}
+
+/* RESUMEN SUPERIOR */
+
+.top-dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.kpi-card,
+.circle-card,
+.chart-card,
+.records-card {
+  background-color: #ffffff;
+  border-radius: 13px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 6px rgba(15, 23, 42, 0.05);
+}
+
+.kpi-card {
+  padding: 11px 12px;
+}
+
+.kpi-card span,
+.circle-card span {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.kpi-card h2 {
+  margin: 6px 0 2px 0;
+  font-size: 24px;
+  color: #1e3a8a;
+  font-weight: 800;
+}
+
+.kpi-card p,
+.circle-card p {
+  margin: 0;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.circle-card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-progress {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  margin: 6px 0 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-inner {
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #1e3a8a;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ZONA PRINCIPAL */
+
+.main-dashboard {
+  display: grid;
+  grid-template-columns: 0.85fr 1.45fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.chart-card,
+.records-card {
+  padding: 12px;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-header {
+  margin-bottom: 9px;
+}
+
+.chart-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.chart-header span {
+  display: block;
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 12px;
+}
+
+/* RENDIMIENTO POR EJERCICIO */
+
+.exercise-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.exercise-row {
+  padding: 9px;
+  border-radius: 11px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.exercise-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.exercise-title h3 {
+  margin: 0;
+  font-size: 13px;
+  color: #1e3a8a;
+  font-weight: 800;
+}
+
+.exercise-title span {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.exercise-metrics {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 6px;
+}
+
+.mini-circle-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.mini-circle-box span {
+  font-size: 11px;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.mini-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-circle-inner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #1e3a8a;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* BARRAS */
+
+.bar-line {
+  display: grid;
+  grid-template-columns: 82px 1fr 60px;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.bar-line span {
+  font-size: 11px;
+  color: #4b5563;
+  font-weight: 700;
+}
+
+.bar-line strong {
+  font-size: 11px;
+  color: #111827;
+  text-align: right;
+}
+
+.bar-track {
+  height: 7px;
+  border-radius: 999px;
+  background-color: #e5e7eb;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+}
+
+.bar-fill.repeticiones {
+  background-color: #2563eb;
+}
+
+.bar-fill.duracion {
+  background-color: #10b981;
+}
+
+/* TABLA CON SCROLL */
+
+.table-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+}
+
+.compact-table {
+  width: 100%;
+  min-width: 850px;
+  background-color: #ffffff;
+}
+
+.compact-table th {
+  font-weight: 800;
+  color: #111827;
+  font-size: 12px;
+  height: 34px;
+  background-color: #f9fafb;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.compact-table td {
+  color: #374151;
+  font-size: 12px;
+  height: 34px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.observacion-cell {
+  max-width: 360px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* SCROLL LIMPIO */
+
+.exercise-chart::-webkit-scrollbar,
+.table-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.exercise-chart::-webkit-scrollbar-thumb,
+.table-scroll::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 999px;
+}
+
+.exercise-chart::-webkit-scrollbar-track,
+.table-scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1200px) {
+  .top-dashboard {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .main-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .exercise-chart,
+  .table-scroll {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .top-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .bar-line {
+    grid-template-columns: 78px 1fr 55px;
+  }
+}

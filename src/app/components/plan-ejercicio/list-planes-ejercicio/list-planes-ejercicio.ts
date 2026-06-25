@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PlanEjercicioDTO } from '../../../models/PlanEjercicioDTO';
 import { PlanEjercicioService } from '../../../services/plan-ejercicio-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EstadisticaDTO } from '../../../models/EstadisticaDTO';
+import { EstadisticaService } from '../../../services/estadistica-service';
 
 @Component({
   selector: 'app-list-planes-ejercicio',
@@ -14,6 +16,8 @@ export class ListPlanesEjercicio {
   planId: number = 0;
 
   listaPlanEjercicios: PlanEjercicioDTO[] = [];
+  
+  listaEstadisticas: EstadisticaDTO[] = [];
 
   diasSemana: string[] = ['LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO', 'DOMINGO'];
 
@@ -23,10 +27,11 @@ export class ListPlanesEjercicio {
   // Fisio 1 -> fisioterapeutaId 1
   // Fisio 2 -> fisioterapeutaId 2
   // Fisio 3 -> fisioterapeutaId 3
-  fisioterapeutaId: number = 1;
+  fisioterapeutaId: number = 0;
 
   constructor(
     private planEjercicioService: PlanEjercicioService,
+    private estadisticaService: EstadisticaService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -36,6 +41,7 @@ export class ListPlanesEjercicio {
   ngOnInit(): void {
     this.planId = Number(this.activatedRoute.snapshot.paramMap.get('planId'));
     this.CargaLista();
+    this.CargarEstadisticas();
   }
 
   CargaLista(): void {
@@ -54,6 +60,23 @@ export class ListPlanesEjercicio {
         console.log('ERROR AL CARGAR PLAN EJERCICIO:', err);
       }
     });
+  }
+
+  CargarEstadisticas(): void {
+    this.estadisticaService.listByPlanRehabilitacionId(this.planId).subscribe({
+      next: (data: EstadisticaDTO[]) => {
+        this.listaEstadisticas = data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+      }
+    });
+  }
+
+  obtenerEstadistica(planEjercicioId: number): EstadisticaDTO | undefined {
+    return this.listaEstadisticas.find(e =>
+      e.planEjercicioId === planEjercicioId
+    );
   }
 
   generarFilas(): void {
@@ -98,6 +121,10 @@ export class ListPlanesEjercicio {
 
   subirProgreso(planEjercicioId: number): void {
     this.router.navigate(['/plan-rehabilitacion',this.planId,'plan-ejercicio',planEjercicioId,'progreso']);
+  }
+
+  editarProgreso(planEjercicioId: number, estadisticaId: number): void {
+    this.router.navigate(['/plan-rehabilitacion',this.planId,'plan-ejercicio',planEjercicioId,'progreso','editar',estadisticaId]);
   }
 
   volver(): void {

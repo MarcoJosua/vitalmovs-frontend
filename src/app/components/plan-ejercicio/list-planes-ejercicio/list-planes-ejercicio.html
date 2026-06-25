@@ -95,12 +95,23 @@
                 <!-- Acción solo para paciente -->
                 <div class="card-actions" *ngIf="fisioterapeutaId === 0">
 
-                  <button
-                    mat-raised-button
-                    color="accent"
-                    (click)="subirProgreso(ejercicio.id)">
-                    Subir progreso
-                  </button>
+                  <ng-container *ngIf="obtenerEstadistica(ejercicio.id) as estadistica; else sinEstadistica">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      (click)="editarProgreso(ejercicio.id, estadistica.id)">
+                      Editar progreso
+                    </button>
+                  </ng-container>
+
+                  <ng-template #sinEstadistica>
+                    <button
+                      mat-raised-button
+                      color="accent"
+                      (click)="subirProgreso(ejercicio.id)">
+                      Subir progreso
+                    </button>
+                  </ng-template>
 
                 </div>
 

@@ -1,0 +1,214 @@
+<div class="dashboard-container">
+
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard de progreso</h1>
+      <p>Plan de rehabilitación ID: {{ planId }}</p>
+    </div>
+
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="volver()">
+      Volver
+    </button>
+  </div>
+
+  <p class="empty-message" *ngIf="estadisticas.length === 0">
+    Este plan todavía no tiene estadísticas registradas.
+  </p>
+
+  <!-- RESUMEN SUPERIOR -->
+  <div class="top-dashboard" *ngIf="resumen as r">
+
+    <div class="kpi-card">
+      <span>Total registros</span>
+      <h2>{{ r.cantidadRegistros || 0 }}</h2>
+      <p>progresos registrados</p>
+    </div>
+
+    <div class="circle-card">
+      <span>Dolor promedio</span>
+
+      <div
+        class="circle-progress"
+        [style.background]="generarCirculo(r.promedioDolor, 10)">
+        <div class="circle-inner">
+          {{ formatearNumero(r.promedioDolor) }}
+        </div>
+      </div>
+
+      <p>Escala 0 - 10</p>
+    </div>
+
+    <div class="circle-card">
+      <span>Dificultad promedio</span>
+
+      <div
+        class="circle-progress"
+        [style.background]="generarCirculo(r.promedioDificultad, 10)">
+        <div class="circle-inner">
+          {{ formatearNumero(r.promedioDificultad) }}
+        </div>
+      </div>
+
+      <p>Escala 0 - 10</p>
+    </div>
+
+    <div class="kpi-card">
+      <span>Total repeticiones</span>
+      <h2>{{ r.totalRepeticiones || 0 }}</h2>
+      <p>repeticiones acumuladas</p>
+    </div>
+
+    <div class="kpi-card">
+      <span>Total duración</span>
+      <h2>{{ r.totalDuracion || 0 }}</h2>
+      <p>minutos acumulados</p>
+    </div>
+
+  </div>
+
+  <!-- ZONA PRINCIPAL -->
+  <div class="main-dashboard" *ngIf="estadisticas.length > 0">
+
+    <!-- RENDIMIENTO POR EJERCICIO -->
+    <div class="chart-card">
+
+      <div class="chart-header">
+        <h2>Rendimiento por ejercicio</h2>
+        <span>Comparación acumulada por tipo de ejercicio</span>
+      </div>
+
+      <div class="exercise-chart">
+
+        <div class="exercise-row" *ngFor="let item of resumenEjerciciosAgrupado">
+
+          <div class="exercise-title">
+            <h3>{{ item.nombreEjercicio }}</h3>
+            <span>{{ item.cantidadRegistros || 0 }} registros</span>
+          </div>
+
+          <div class="exercise-metrics">
+
+            <div class="mini-circle-box">
+              <div
+                class="mini-circle"
+                [style.background]="generarCirculo(item.promedioDolor, 10)">
+                <div class="mini-circle-inner">
+                  {{ formatearNumero(item.promedioDolor) }}
+                </div>
+              </div>
+
+              <span>Dolor</span>
+            </div>
+
+            <div class="mini-circle-box">
+              <div
+                class="mini-circle"
+                [style.background]="generarCirculo(item.promedioDificultad, 10)">
+                <div class="mini-circle-inner">
+                  {{ formatearNumero(item.promedioDificultad) }}
+                </div>
+              </div>
+
+              <span>Dificultad</span>
+            </div>
+
+          </div>
+
+          <div class="bar-line compact">
+            <span>Repeticiones</span>
+
+            <div class="bar-track">
+              <div
+                class="bar-fill repeticiones"
+                [style.width.%]="calcularPorcentaje(item.totalRepeticiones, maximoRepeticionesEjercicio())">
+              </div>
+            </div>
+
+            <strong>{{ item.totalRepeticiones || 0 }}</strong>
+          </div>
+
+          <div class="bar-line compact">
+            <span>Duración</span>
+
+            <div class="bar-track">
+              <div
+                class="bar-fill duracion"
+                [style.width.%]="calcularPorcentaje(item.totalDuracion, maximoDuracionEjercicio())">
+              </div>
+            </div>
+
+            <strong>{{ item.totalDuracion || 0 }} min</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- TABLA COMPLETA CON SCROLL INTERNO -->
+    <div class="records-card">
+
+      <div class="chart-header">
+        <h2>Registros de progreso</h2>
+        <span>Detalle completo de progreso registrado</span>
+      </div>
+
+      <div class="table-scroll">
+
+        <table mat-table [dataSource]="estadisticas" class="compact-table">
+
+          <ng-container matColumnDef="fecha">
+            <th mat-header-cell *matHeaderCellDef>Fecha</th>
+            <td mat-cell *matCellDef="let e">{{ e.fecha }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="planEjercicioId">
+            <th mat-header-cell *matHeaderCellDef>Ejercicio</th>
+            <td mat-cell *matCellDef="let e">
+              {{ obtenerNombreEjercicio(e.planEjercicioId) }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nivelDolor">
+            <th mat-header-cell *matHeaderCellDef>Dolor</th>
+            <td mat-cell *matCellDef="let e">{{ e.nivelDolor }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="nivelDificultad">
+            <th mat-header-cell *matHeaderCellDef>Dificultad</th>
+            <td mat-cell *matCellDef="let e">{{ e.nivelDificultad }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="repeticionesRealizadas">
+            <th mat-header-cell *matHeaderCellDef>Rep.</th>
+            <td mat-cell *matCellDef="let e">{{ e.repeticionesRealizadas }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="duracionRealizada">
+            <th mat-header-cell *matHeaderCellDef>Min.</th>
+            <td mat-cell *matCellDef="let e">{{ e.duracionRealizada }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="observacion">
+            <th mat-header-cell *matHeaderCellDef>Observación</th>
+            <td mat-cell *matCellDef="let e" class="observacion-cell">
+              {{ e.observacion }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

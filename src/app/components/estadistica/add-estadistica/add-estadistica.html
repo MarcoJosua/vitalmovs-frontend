@@ -1,0 +1,177 @@
+<div class="add-estadistica-container">
+
+  <div class="page-header">
+    <h2 *ngIf="!modoEdicion">Registrar progreso</h2>
+    <h2 *ngIf="modoEdicion">Editar progreso</h2>
+
+    <p>Plan de rehabilitación ID: {{ planId }}</p>
+    <p>Plan ejercicio ID: {{ planEjercicioId }}</p>
+
+    <p *ngIf="planEjercicio">
+      Día programado: <strong>{{ planEjercicio.diaSemana }}</strong>
+    </p>
+  </div>
+
+  <form [formGroup]="estadisticaForm">
+
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput formControlName="id" readonly>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Fecha de realización</mat-label>
+
+      <input
+        matInput
+        [matDatepicker]="pickerFecha"
+        formControlName="fecha"
+        [min]="fechaMinima"
+        [max]="fechaMaxima">
+
+      <mat-hint>
+        Seleccione la fecha en que realizó el ejercicio
+      </mat-hint>
+
+      <mat-datepicker-toggle matIconSuffix [for]="pickerFecha"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFecha></mat-datepicker>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('fecha')?.hasError('required')">
+        Campo requerido
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Nivel de dolor</mat-label>
+
+      <input
+        matInput
+        type="number"
+        formControlName="nivelDolor"
+        min="0"
+        max="10">
+
+      <mat-hint>Ingrese un valor entre 0 y 10</mat-hint>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('nivelDolor')?.hasError('required')">
+        Campo requerido
+      </span>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('nivelDolor')?.hasError('min') || estadisticaForm.get('nivelDolor')?.hasError('max')">
+        El nivel de dolor debe estar entre 0 y 10
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Nivel de dificultad</mat-label>
+
+      <input
+        matInput
+        type="number"
+        formControlName="nivelDificultad"
+        min="0"
+        max="10">
+
+      <mat-hint>Ingrese un valor entre 0 y 10</mat-hint>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('nivelDificultad')?.hasError('required')">
+        Campo requerido
+      </span>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('nivelDificultad')?.hasError('min') || estadisticaForm.get('nivelDificultad')?.hasError('max')">
+        El nivel de dificultad debe estar entre 0 y 10
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Repeticiones realizadas</mat-label>
+
+      <input
+        matInput
+        type="number"
+        formControlName="repeticionesRealizadas"
+        min="0">
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('repeticionesRealizadas')?.hasError('required')">
+        Campo requerido
+      </span>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('repeticionesRealizadas')?.hasError('min')">
+        Las repeticiones no pueden ser negativas
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Duración realizada</mat-label>
+
+      <input
+        matInput
+        type="number"
+        formControlName="duracionRealizada"
+        min="0">
+
+      <mat-hint>Duración en minutos</mat-hint>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('duracionRealizada')?.hasError('required')">
+        Campo requerido
+      </span>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('duracionRealizada')?.hasError('min')">
+        La duración no puede ser negativa
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+      <mat-label>Observación</mat-label>
+
+      <textarea
+        matInput
+        rows="4"
+        formControlName="observacion"
+        placeholder="Describe cómo te fue con el ejercicio"></textarea>
+
+      <span style="color: red;" *ngIf="estadisticaForm.get('observacion')?.hasError('required')">
+        Campo requerido
+      </span>
+    </mat-form-field>
+
+    <br><br>
+
+    <div class="actions">
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="Grabar()">
+
+        <span *ngIf="!modoEdicion">Guardar progreso</span>
+        <span *ngIf="modoEdicion">Actualizar progreso</span>
+
+      </button>
+
+      <button
+        mat-button
+        color="warn"
+        type="button"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

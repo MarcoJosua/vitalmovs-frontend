@@ -11,9 +11,20 @@ import { AddPlanes } from './components/plan-rehabilitacion/add-planes/add-plane
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { ListPlanesEjercicio } from './components/plan-ejercicio/list-planes-ejercicio/list-planes-ejercicio';
 import { AddPlanesEjercicio } from './components/plan-ejercicio/add-planes-ejercicio/add-planes-ejercicio';
+import { AddEstadistica } from './components/estadistica/add-estadistica/add-estadistica';
+import { ListEstadistica } from './components/estadistica/list-estadistica/list-estadistica';
 
 @NgModule({
-  declarations: [App, Cabecera, ListPlanes, AddPlanes, ListPlanesEjercicio, AddPlanesEjercicio],
+  declarations: [
+    App,
+    Cabecera,
+    ListPlanes,
+    AddPlanes,
+    ListPlanesEjercicio,
+    AddPlanesEjercicio,
+    AddEstadistica,
+    ListEstadistica,
+  ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter()],
   bootstrap: [App],
