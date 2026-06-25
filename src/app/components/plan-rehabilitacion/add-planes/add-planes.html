@@ -1,11 +1,11 @@
-<div class="add-planes-container">
+<div class="page-background">
 
-  <div>
-    <h2>Agregar plan de rehabilitación</h2>
-    <p>Asignación seleccionada: {{ asignacionId }}</p>
+  <div class="page-header">
+    <h2 *ngIf="!modoEdicion">Agregar plan de rehabilitación</h2>
+    <h2 *ngIf="modoEdicion">Editar plan de rehabilitación</h2>
   </div>
 
-  <form [formGroup]="planForm">
+  <form class="form-card" [formGroup]="planForm">
 
     <mat-form-field>
       <mat-label>Nombre del plan</mat-label>
@@ -68,16 +68,24 @@
     </mat-form-field>
 
     <br><br>
+    <div class="actions">
 
-    <button mat-raised-button color="primary" type="button" (click)="guardarPlan()">
-      Grabar
-    </button>
+      <button
+        mat-stroked-button
+        class="btn-texto-morado"
+        (click)="guardarPlan()"> Grabar
+      </button>
 
-    &nbsp;&nbsp;&nbsp;
+      <button
+        mat-stroked-button
+        class="btn-texto-morado"
+        (click)="cancelar()">
+        Cancelar
+      </button>
 
-    <button mat-button color="warn" type="button" (click)="cancelar()">
-      Cancelar
-    </button>
+    </div>
+
+  
 
   </form>
 

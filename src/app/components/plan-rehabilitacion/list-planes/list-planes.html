@@ -1,4 +1,4 @@
-<div class="planes-container">
+<div class="page-background">
 
   <div class="page-header">
     <h1>
@@ -46,8 +46,8 @@
         </p>
 
         <button
-          mat-raised-button
-          color="primary"
+          mat-stroked-button
+          class="btn-texto-morado"
           (click)="crearPlan(asignacion.id)">
           Crear plan
         </button>
@@ -99,30 +99,30 @@
         <div class="actions">
 
           <button
-            mat-raised-button
-            color="primary"
+            mat-stroked-button
+            class="btn-texto-morado"
             (click)="verRutina(plan.id)">
             Ver rutina semanal
           </button>
 
           <button
-            mat-button
-            color="accent"
+            mat-stroked-button
+            class="btn-texto-morado"
             (click)="verEstadisticas(plan.id)">
             Ver progreso
           </button>
 
           <button
-            mat-button
-            color="warn"
+            mat-stroked-button
+            class="btn-texto-morado"
             *ngIf="rol === 'ROLE_FISIOTERAPEUTA' && plan.estado === 'ACTIVO'"
             (click)="cancelarPlan(plan)">
             Cancelar plan
           </button>
 
           <button
-            mat-button
-            color="primary"
+            mat-stroked-button
+            class="btn-texto-morado"
             *ngIf="fisioterapeutaId !== 0"
             (click)="editarPlan(plan.id)">
             Editar plan

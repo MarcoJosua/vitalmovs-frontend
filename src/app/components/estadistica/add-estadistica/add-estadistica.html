@@ -1,14 +1,11 @@
-<div class="add-estadistica-container">
+<div class="page-background">
 
   <div class="page-header">
     <h2 *ngIf="!modoEdicion">Registrar progreso</h2>
     <h2 *ngIf="modoEdicion">Editar progreso</h2>
-
-    <p>Plan de rehabilitación ID: {{ planId }}</p>
-    <p>Plan ejercicio ID: {{ planEjercicioId }}</p>
   </div>
 
-  <form [formGroup]="estadisticaForm">
+  <form class="form-card" [formGroup]="estadisticaForm">
 
     <mat-form-field>
       <mat-label>Fecha de registro</mat-label>
@@ -125,9 +122,8 @@
     <div class="actions">
 
       <button
-        mat-raised-button
-        color="primary"
-        type="button"
+        mat-stroked-button
+        class="btn-texto-morado"
         (click)="Grabar()">
 
         <span *ngIf="!modoEdicion">Guardar progreso</span>
@@ -136,9 +132,8 @@
       </button>
 
       <button
-        mat-button
-        color="warn"
-        type="button"
+        mat-stroked-button
+        class="btn-texto-morado"
         (click)="cancelar()">
         Cancelar
       </button>

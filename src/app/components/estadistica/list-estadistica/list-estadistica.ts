@@ -164,7 +164,7 @@ export class ListEstadistica implements OnInit {
 
   generarCirculo(valor: number | null | undefined, maximo: number): string {
     const porcentaje = this.calcularPorcentaje(valor, maximo);
-    return `conic-gradient(#2563eb ${porcentaje}%, #e5e7eb ${porcentaje}% 100%)`;
+    return `conic-gradient(#B10EE8 ${porcentaje}%, #e5e7eb ${porcentaje}% 100%)`;
   }
 
   maximoRepeticionesEjercicio(): number {

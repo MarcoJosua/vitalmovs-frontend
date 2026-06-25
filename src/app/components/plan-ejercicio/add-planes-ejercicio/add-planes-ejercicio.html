@@ -1,13 +1,11 @@
-<div class="add-plan-ejercicio-container">
+<div class="page-background">
 
   <div class="page-header">
     <h2 *ngIf="!modoEdicion">Agregar ejercicio al plan</h2>
     <h2 *ngIf="modoEdicion">Editar ejercicio del plan</h2>
-
-    <p>Plan de rehabilitación ID: {{ planId }}</p>
   </div>
 
-  <form [formGroup]="planEjercicioForm">
+  <form class="form-card" [formGroup]="planEjercicioForm">
     
     <mat-form-field>
       <mat-label>Ejercicio</mat-label>
@@ -52,15 +50,13 @@
       <span style="color: red;" *ngIf="planEjercicioForm.get('orden')?.hasError('min')">
         El orden debe ser mayor a cero
       </span>
+
+      <span
+        style="color: red;"
+        *ngIf="planEjercicioForm.get('diaSemana')?.value && planEjercicioForm.get('orden')?.value && espacioOcupado()">
+        Ese espacio del horario ya está ocupado para este plan.
+      </span>
     </mat-form-field>
-
-    <br>
-
-    <span
-      class="warning-message"
-      *ngIf="planEjercicioForm.get('diaSemana')?.value && planEjercicioForm.get('orden')?.value && espacioOcupado()">
-      Ese espacio del horario ya está ocupado para este plan.
-    </span>
 
     <br><br>
 
@@ -111,17 +107,15 @@
 
     <div class="actions">
       <button
-        mat-raised-button
-        color="primary"
-        type="button"
+        mat-stroked-button
+        class="btn-texto-morado"
         (click)="Grabar()">
         Grabar
       </button>
 
       <button
-        mat-button
-        color="warn"
-        type="button"
+        mat-stroked-button
+        class="btn-texto-morado"
         (click)="cancelar()">
         Cancelar
       </button>

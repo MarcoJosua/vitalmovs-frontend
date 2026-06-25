@@ -1,1 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
+
+/* 
+   Fondo  - U202123832
+*/
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background-color: #fbf3fb;
+}
+
+.page-background {
+  padding: 24px;
+  background-color: #ffedf8;
+  min-height: 100vh;
+}
+
+
+
+/* 
+   Botones  - U202123832
+*/
+
+button.btn-texto-morado.mat-mdc-outlined-button {
+  background-color: #ffffff !important;
+  color: #4b0872!important;
+
+  border: 1px solid #d1d5db !important;
+  border-radius: 999px !important;
+
+  padding: 0 28px !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) !important;
+}
+
+button.btn-texto-morado.mat-mdc-outlined-button .mdc-button__label {
+  color: #4b0872 !important;
+}
+
+button.btn-texto-morado.mat-mdc-outlined-button:hover {
+  background-color: rgba(241, 13, 154, 0.164) !important;
+}
+
+/* 
+   Formularios   - U202123832
+*/
+
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+form {
+  max-width: 560px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(168, 35, 185, 0.596);
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}

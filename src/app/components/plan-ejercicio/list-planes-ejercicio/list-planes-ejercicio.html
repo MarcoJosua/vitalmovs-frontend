@@ -1,4 +1,4 @@
-<div class="rutina-container">
+<div class="page-background">
 
   <div class="page-header">
     <div>
@@ -10,16 +10,16 @@
 
       <!-- Solo fisioterapeuta -->
       <button
-        mat-raised-button
-        color="primary"
+          mat-stroked-button
+          class="btn-texto-morado"
         *ngIf="fisioterapeutaId !== 0"
         (click)="agregarEjercicio()">
         Agregar ejercicio
       </button>
 
       <button
-        mat-raised-button
-        color="accent"
+          mat-stroked-button
+          class="btn-texto-morado"
         (click)="volver()">
         Volver
       </button>
@@ -77,15 +77,15 @@
                 <div class="card-actions" *ngIf="fisioterapeutaId !== 0">
 
                   <button
-                    mat-raised-button
-                    color="accent"
+                    mat-stroked-button
+                    class="btn-texto-morado"
                     (click)="editarEjercicio(ejercicio.id)">
                     Editar
                   </button>
 
                   <button
-                    mat-raised-button
-                    color="accent"
+                    mat-stroked-button
+                    class="btn-texto-morado"  
                     (click)="eliminarEjercicio(ejercicio.id)">
                     Eliminar
                   </button>
@@ -97,8 +97,8 @@
 
                   <ng-container *ngIf="obtenerEstadistica(ejercicio.id) as estadistica; else sinEstadistica">
                     <button
-                      mat-raised-button
-                      color="primary"
+                      mat-stroked-button
+                      class="btn-texto-morado"
                       (click)="editarProgreso(ejercicio.id, estadistica.id)">
                       Editar progreso
                     </button>
@@ -106,8 +106,8 @@
 
                   <ng-template #sinEstadistica>
                     <button
-                      mat-raised-button
-                      color="accent"
+                      mat-stroked-button
+                      class="btn-texto-morado"
                       (click)="subirProgreso(ejercicio.id)">
                       Subir progreso
                     </button>

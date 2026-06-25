@@ -170,11 +170,6 @@ export class AddEstadistica implements OnInit {
           this.router.navigate(['/plan-rehabilitacion', this.planId, 'plan-ejercicio']);
         },
         error: (err) => {
-          console.log('ERROR AL ACTUALIZAR ESTADISTICA:', err);
-
-          this.snackBar.open('No se pudo actualizar el progreso', 'Cerrar', {
-            duration: 3000
-          });
         }
       });
     } else {
@@ -187,11 +182,6 @@ export class AddEstadistica implements OnInit {
           this.router.navigate(['/plan-rehabilitacion', this.planId, 'plan-ejercicio']);
         },
         error: (err) => {
-          console.log('ERROR AL REGISTRAR ESTADISTICA:', err);
-
-          this.snackBar.open('No se pudo registrar el progreso', 'Cerrar', {
-            duration: 3000
-          });
         }
       });
     }
