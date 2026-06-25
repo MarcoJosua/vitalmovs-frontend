@@ -6,12 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { EstadisticaDTO } from '../../../models/EstadisticaDTO';
 import { EstadisticaService } from '../../../services/estadistica-service';
 
-import { PlanRehabilitacionDTO } from '../../../models/PlanRehabilitacionDTO';
-import { PlanRehabilitacionService } from '../../../services/plan-rehabilitacion-service';
-
-import { PlanEjercicioDTO } from '../../../models/PlanEjercicioDTO';
-import { PlanEjercicioService } from '../../../services/plan-ejercicio-service';
-
 @Component({
   selector: 'app-add-estadistica',
   standalone: false,
@@ -21,22 +15,18 @@ import { PlanEjercicioService } from '../../../services/plan-ejercicio-service';
 export class AddEstadistica implements OnInit {
 
   estadisticaForm!: FormGroup;
+
   planId: number = 0;
   planEjercicioId: number = 0;
   estadisticaId: number = 0;
+
   modoEdicion: boolean = false;
-  plan!: PlanRehabilitacionDTO;
-  planEjercicio!: PlanEjercicioDTO;
+
   listaEstadisticas: EstadisticaDTO[] = [];
-  fechaHoy: Date = new Date();
-  fechaMinima!: Date;
-  fechaMaxima!: Date;
 
   constructor(
     private formBuilder: FormBuilder,
     private estadisticaService: EstadisticaService,
-    private planRehabilitacionService: PlanRehabilitacionService,
-    private planEjercicioService: PlanEjercicioService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar
@@ -55,7 +45,7 @@ export class AddEstadistica implements OnInit {
 
     this.estadisticaForm = this.formBuilder.group({
       id: [0],
-      fecha: [this.fechaHoy, Validators.required],
+      fecha: [this.obtenerFechaHoyTexto()],
       nivelDolor: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
       nivelDificultad: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
       repeticionesRealizadas: ['', [Validators.required, Validators.min(0)]],
@@ -64,8 +54,6 @@ export class AddEstadistica implements OnInit {
       planEjercicioId: [this.planEjercicioId]
     });
 
-    this.CargarPlan();
-    this.CargarPlanEjercicio();
     this.CargarEstadisticasDelEjercicio();
 
     if (this.modoEdicion) {
@@ -73,41 +61,24 @@ export class AddEstadistica implements OnInit {
     }
   }
 
-  CargarPlan(): void {
-    this.planRehabilitacionService.getById(this.planId).subscribe({
-      next: (data: PlanRehabilitacionDTO) => {
-        this.plan = data;
-
-        this.fechaMinima = this.crearFechaLocal(this.plan.fecha_inicio);
-
-        const fechaFinPlan = this.crearFechaLocal(this.plan.fecha_fin);
-        const hoy = this.limpiarHora(new Date());
-
-        if (fechaFinPlan < hoy) {
-          this.fechaMaxima = fechaFinPlan;
-        } else {
-          this.fechaMaxima = hoy;
-        }
-
-        if (!this.modoEdicion) {
-          this.estadisticaForm.get('fecha')?.setValue(this.obtenerFechaInicial());
-        }
+  cargarEstadistica(): void {
+    this.estadisticaService.getById(this.estadisticaId).subscribe({
+      next: (data: EstadisticaDTO) => {
+        this.estadisticaForm.get('id')?.setValue(data.id);
+        this.estadisticaForm.get('fecha')?.setValue(data.fecha);
+        this.estadisticaForm.get('nivelDolor')?.setValue(data.nivelDolor);
+        this.estadisticaForm.get('nivelDificultad')?.setValue(data.nivelDificultad);
+        this.estadisticaForm.get('repeticionesRealizadas')?.setValue(data.repeticionesRealizadas);
+        this.estadisticaForm.get('duracionRealizada')?.setValue(data.duracionRealizada);
+        this.estadisticaForm.get('observacion')?.setValue(data.observacion);
+        this.estadisticaForm.get('planEjercicioId')?.setValue(data.planEjercicioId);
       },
       error: (err) => {
-      }
-    });
-  }
+        console.log('ERROR AL CARGAR ESTADISTICA:', err);
 
-  CargarPlanEjercicio(): void {
-    this.planEjercicioService.findByPlanIdOrdenado(this.planId).subscribe({
-      next: (data: PlanEjercicioDTO[]) => {
-        const encontrado = data.find(e => e.id === this.planEjercicioId);
-
-        if (encontrado) {
-          this.planEjercicio = encontrado;
-        }
-      },
-      error: (err) => {
+        this.snackBar.open('No se pudo cargar el progreso', 'Cerrar', {
+          duration: 3000
+        });
       }
     });
   }
@@ -118,69 +89,18 @@ export class AddEstadistica implements OnInit {
         this.listaEstadisticas = data;
       },
       error: (err) => {
+        console.log('ERROR AL CARGAR ESTADISTICAS DEL EJERCICIO:', err);
       }
     });
   }
 
-  cargarEstadistica(): void {
-    this.estadisticaService.getById(this.estadisticaId).subscribe({
-      next: (data: EstadisticaDTO) => {
-        this.estadisticaForm.get('id')?.setValue(data.id);
-        this.estadisticaForm.get('fecha')?.setValue(this.crearFechaLocal(data.fecha));
-        this.estadisticaForm.get('nivelDolor')?.setValue(data.nivelDolor);
-        this.estadisticaForm.get('nivelDificultad')?.setValue(data.nivelDificultad);
-        this.estadisticaForm.get('repeticionesRealizadas')?.setValue(data.repeticionesRealizadas);
-        this.estadisticaForm.get('duracionRealizada')?.setValue(data.duracionRealizada);
-        this.estadisticaForm.get('observacion')?.setValue(data.observacion);
-        this.estadisticaForm.get('planEjercicioId')?.setValue(data.planEjercicioId);
-      },
-      error: (err) => {
-      }
-    });
-  }
+  obtenerFechaHoyTexto(): string {
+    const hoy = new Date();
+    const anio = hoy.getFullYear();
+    const mes = String(hoy.getMonth() + 1).padStart(2, '0');
+    const dia = String(hoy.getDate()).padStart(2, '0');
 
-  obtenerFechaInicial(): Date {
-    const hoy = this.limpiarHora(new Date());
-
-    if (this.fechaMinima && hoy < this.fechaMinima) {
-      return this.fechaMinima;
-    }
-
-    if (this.fechaMaxima && hoy > this.fechaMaxima) {
-      return this.fechaMaxima;
-    }
-
-    return hoy;
-  }
-
-  crearFechaLocal(fecha: string): Date {
-    return new Date(fecha + 'T00:00:00');
-  }
-
-  limpiarHora(fecha: Date): Date {
-    const nuevaFecha = new Date(fecha);
-    nuevaFecha.setHours(0, 0, 0, 0);
-    return nuevaFecha;
-  }
-
-  convertirFecha(fecha: Date): string {
-    const anio = fecha.getFullYear();
-    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-    const dia = String(fecha.getDate()).padStart(2, '0');
     return `${anio}-${mes}-${dia}`;
-  }
-
-  obtenerDiaSemana(fecha: Date): string {
-    const dias = [
-      'DOMINGO',
-      'LUNES',
-      'MARTES',
-      'MIERCOLES',
-      'JUEVES',
-      'VIERNES',
-      'SABADO'
-    ];
-    return dias[fecha.getDay()];
   }
 
   existeEstadisticaMismaFecha(fechaTexto: string): boolean {
@@ -190,53 +110,14 @@ export class AddEstadistica implements OnInit {
     );
   }
 
-  validarFechaSeleccionada(fechaSeleccionada: Date): boolean {
-    const fecha = this.limpiarHora(fechaSeleccionada);
-    const hoy = this.limpiarHora(new Date());
+  validarRegistroDeHoy(): boolean {
+    const fechaHoy = this.obtenerFechaHoyTexto();
 
-    if (fecha > hoy) {
-      this.snackBar.open('La fecha no puede ser futura', 'Cerrar', {
+    if (this.existeEstadisticaMismaFecha(fechaHoy)) {
+      this.snackBar.open('Ya existe un progreso registrado para este ejercicio el día de hoy', 'Cerrar', {
         duration: 3000
       });
-      return false;
-    }
 
-    if (this.fechaMinima && fecha < this.fechaMinima) {
-      this.snackBar.open('La fecha debe estar dentro del rango del plan', 'Cerrar', {
-        duration: 3000
-      });
-      return false;
-    }
-
-    if (this.fechaMaxima && fecha > this.fechaMaxima) {
-      this.snackBar.open('La fecha debe estar dentro del rango del plan', 'Cerrar', {
-        duration: 3000
-      });
-      return false;
-    }
-
-    if (!this.planEjercicio) {
-      this.snackBar.open('No se pudo validar el ejercicio del plan', 'Cerrar', {
-        duration: 3000
-      });
-      return false;
-    }
-
-    const diaFecha = this.obtenerDiaSemana(fecha);
-
-    if (diaFecha !== this.planEjercicio.diaSemana) {
-      this.snackBar.open('La fecha seleccionada no coincide con el día del ejercicio', 'Cerrar', {
-        duration: 3000
-      });
-      return false;
-    }
-
-    const fechaTexto = this.convertirFecha(fecha);
-
-    if (this.existeEstadisticaMismaFecha(fechaTexto)) {
-      this.snackBar.open('Ya existe un progreso registrado para este ejercicio en esa fecha', 'Cerrar', {
-        duration: 3000
-      });
       return false;
     }
 
@@ -248,12 +129,11 @@ export class AddEstadistica implements OnInit {
       this.snackBar.open('Complete todos los campos correctamente', 'Cerrar', {
         duration: 3000
       });
+
       return;
     }
 
-    const fechaSeleccionada: Date = this.estadisticaForm.get('fecha')?.value;
-
-    if (!this.validarFechaSeleccionada(fechaSeleccionada)) {
+    if (!this.modoEdicion && !this.validarRegistroDeHoy()) {
       return;
     }
 
@@ -263,12 +143,15 @@ export class AddEstadistica implements OnInit {
       this.snackBar.open('La observación no puede estar vacía', 'Cerrar', {
         duration: 3000
       });
+
       return;
     }
 
     const estadisticaDTO: EstadisticaDTO = {
       id: this.modoEdicion ? this.estadisticaId : 0,
-      fecha: this.convertirFecha(fechaSeleccionada),
+      fecha: this.modoEdicion
+        ? this.estadisticaForm.get('fecha')?.value
+        : this.obtenerFechaHoyTexto(),
       nivelDolor: Number(this.estadisticaForm.get('nivelDolor')?.value),
       nivelDificultad: Number(this.estadisticaForm.get('nivelDificultad')?.value),
       repeticionesRealizadas: Number(this.estadisticaForm.get('repeticionesRealizadas')?.value),
@@ -287,6 +170,11 @@ export class AddEstadistica implements OnInit {
           this.router.navigate(['/plan-rehabilitacion', this.planId, 'plan-ejercicio']);
         },
         error: (err) => {
+          console.log('ERROR AL ACTUALIZAR ESTADISTICA:', err);
+
+          this.snackBar.open('No se pudo actualizar el progreso', 'Cerrar', {
+            duration: 3000
+          });
         }
       });
     } else {
@@ -299,6 +187,11 @@ export class AddEstadistica implements OnInit {
           this.router.navigate(['/plan-rehabilitacion', this.planId, 'plan-ejercicio']);
         },
         error: (err) => {
+          console.log('ERROR AL REGISTRAR ESTADISTICA:', err);
+
+          this.snackBar.open('No se pudo registrar el progreso', 'Cerrar', {
+            duration: 3000
+          });
         }
       });
     }

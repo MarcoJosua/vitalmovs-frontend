@@ -6,41 +6,14 @@
 
     <p>Plan de rehabilitación ID: {{ planId }}</p>
     <p>Plan ejercicio ID: {{ planEjercicioId }}</p>
-
-    <p *ngIf="planEjercicio">
-      Día programado: <strong>{{ planEjercicio.diaSemana }}</strong>
-    </p>
   </div>
 
   <form [formGroup]="estadisticaForm">
 
     <mat-form-field>
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="id" readonly>
-    </mat-form-field>
-
-    <br><br>
-
-    <mat-form-field>
-      <mat-label>Fecha de realización</mat-label>
-
-      <input
-        matInput
-        [matDatepicker]="pickerFecha"
-        formControlName="fecha"
-        [min]="fechaMinima"
-        [max]="fechaMaxima">
-
-      <mat-hint>
-        Seleccione la fecha en que realizó el ejercicio
-      </mat-hint>
-
-      <mat-datepicker-toggle matIconSuffix [for]="pickerFecha"></mat-datepicker-toggle>
-      <mat-datepicker #pickerFecha></mat-datepicker>
-
-      <span style="color: red;" *ngIf="estadisticaForm.get('fecha')?.hasError('required')">
-        Campo requerido
-      </span>
+      <mat-label>Fecha de registro</mat-label>
+      <input matInput formControlName="fecha" readonly>
+      <mat-hint>El progreso se registra con la fecha actual</mat-hint>
     </mat-form-field>
 
     <br><br>
