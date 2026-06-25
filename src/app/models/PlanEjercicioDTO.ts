@@ -7,4 +7,5 @@ export interface PlanEjercicioDTO {
   orden: number;
   planRehabilitacionId: number;
   ejercicioId: number;
+  nombreEjercicio: string;
 }

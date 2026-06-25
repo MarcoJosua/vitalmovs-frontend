@@ -72,7 +72,7 @@ export class ListPlanes {
   }
 
   verRutina(planId: number): void {
-    this.router.navigate(['/planes', planId, 'rutina']);
+    this.router.navigate(['/plan-rehabilitacion', planId, 'plan-ejercicio']);
   }
 
   verProgreso(planId: number): void {

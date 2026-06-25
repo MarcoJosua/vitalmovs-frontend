@@ -1,0 +1,121 @@
+<div class="rutina-container">
+
+  <div class="page-header">
+    <div>
+      <h1>Rutina semanal del plan</h1>
+      <p>Plan de rehabilitación ID: {{ planId }}</p>
+    </div>
+
+    <div class="header-actions">
+
+      <!-- Solo fisioterapeuta -->
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="fisioterapeutaId !== 0"
+        (click)="agregarEjercicio()">
+        Agregar ejercicio
+      </button>
+
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="volver()">
+        Volver
+      </button>
+
+    </div>
+  </div>
+
+  <p class="empty-message" *ngIf="listaPlanEjercicios.length === 0">
+    Este plan todavía no tiene ejercicios registrados.
+  </p>
+
+  <div class="horario-wrapper" *ngIf="listaPlanEjercicios.length > 0">
+
+    <table class="horario-table">
+
+      <thead>
+        <tr>
+
+          <th *ngFor="let dia of diasSemana">
+            {{ dia }}
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let fila of filas">
+
+          <td *ngFor="let dia of diasSemana" class="horario-cell">
+
+            <ng-container *ngIf="obtenerEjercicio(dia, fila) as ejercicio">
+
+              <div class="ejercicio-card">
+
+                <h3>
+                  {{ ejercicio.nombreEjercicio || ('Ejercicio ID: ' + ejercicio.ejercicioId) }}
+                </h3>
+
+                <p>
+                  <strong>Series:</strong>
+                  {{ ejercicio.series }}
+                </p>
+
+                <p>
+                  <strong>Repeticiones:</strong>
+                  {{ ejercicio.repeticiones }}
+                </p>
+
+                <p>
+                  <strong>Duración:</strong>
+                  {{ ejercicio.duracionRecomendada }} min
+                </p>
+
+                <!-- Acciones solo para fisioterapeuta -->
+                <div class="card-actions" *ngIf="fisioterapeutaId !== 0">
+
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    (click)="editarEjercicio(ejercicio.id)">
+                    Editar
+                  </button>
+
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    (click)="eliminarEjercicio(ejercicio.id)">
+                    Eliminar
+                  </button>
+
+                </div>
+
+                <!-- Acción solo para paciente -->
+                <div class="card-actions" *ngIf="fisioterapeutaId === 0">
+
+                  <button
+                    mat-raised-button
+                    color="accent"
+                    (click)="subirProgreso(ejercicio.id)">
+                    Subir progreso
+                  </button>
+
+                </div>
+
+              </div>
+
+            </ng-container>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>

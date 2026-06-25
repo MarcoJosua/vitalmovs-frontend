@@ -1,0 +1,120 @@
+.rutina-container {
+  padding: 24px;
+  background-color: #f7f9fb;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.page-header p {
+  margin-top: 8px;
+  font-size: 15px;
+  color: #4b5563;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.horario-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.horario-table {
+  width: 100%;
+  min-width: 1350px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  background-color: #ffffff;
+}
+
+.horario-table th {
+  height: 48px;
+  background-color: #f3f4f6;
+  border: 0.5px solid #111827;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.horario-table td {
+  border: 0.5px solid #111827;
+  height: 155px;
+  vertical-align: top;
+  padding: 8px;
+  background-color: #ffffff;
+}
+
+.orden-header {
+  width: 70px;
+}
+
+.orden-cell {
+  width: 70px;
+  text-align: center;
+  vertical-align: middle !important;
+  font-weight: 700;
+  background-color: #f9fafb !important;
+  color: #111827;
+}
+
+.horario-cell {
+  width: calc((100% - 70px) / 7);
+}
+
+.ejercicio-card {
+  width: 100%;
+  min-height: 125px;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #e0ecff;
+  border: 1px solid #93c5fd;
+}
+
+.ejercicio-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.ejercicio-card p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #1f2937;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.empty-message {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 14px 16px;
+  color: #607d8b;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+}

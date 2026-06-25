@@ -9,9 +9,11 @@ import { Cabecera } from './components/cabecera/cabecera';
 import { ListPlanes } from './components/plan-rehabilitacion/list-planes/list-planes';
 import { AddPlanes } from './components/plan-rehabilitacion/add-planes/add-planes';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { ListPlanesEjercicio } from './components/plan-ejercicio/list-planes-ejercicio/list-planes-ejercicio';
+import { AddPlanesEjercicio } from './components/plan-ejercicio/add-planes-ejercicio/add-planes-ejercicio';
 
 @NgModule({
-  declarations: [App, Cabecera, ListPlanes, AddPlanes],
+  declarations: [App, Cabecera, ListPlanes, AddPlanes, ListPlanesEjercicio, AddPlanesEjercicio],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter()],
   bootstrap: [App],
