@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 
 export class Cabecera {
   constructor (private userService:UserService, private router:Router){}
+
   Logout(){
     this.userService.logout();
     this.router.navigate(["/login"]);
   }
+  
 }
