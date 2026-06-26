@@ -1,0 +1,48 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UserDTO } from '../models/userDTO';
+import { TokenDTO } from '../models/tokenDTO';
+import { tap } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+
+  ruta_servidor: string = "http://localhost:8080/vitalmovs";
+  recurso: string ="users"
+  
+  constructor(private http:HttpClient){}
+
+  login(userDTO: UserDTO){    
+
+      this.logout();
+
+      return this.http.post<TokenDTO>(this.ruta_servidor+"/"+this.recurso+"/"+"login", userDTO).pipe(
+        tap( (data:TokenDTO)=> {
+          localStorage.setItem("jwtToken",data.jwtToken);
+          localStorage.setItem("id",data.id.toString());
+          localStorage.setItem("authorities",data.authorities);
+        }
+        )
+      );
+  }
+
+  logout(){
+    localStorage.clear();
+  }
+
+  getIdLogeado() {
+    return localStorage.getItem("id");
+  }
+
+  getAuthoritiesLogeado() {
+    return localStorage.getItem("authorities");
+  }
+
+  getJwtTokenLogeado() {
+    return localStorage.getItem("jwtToken");
+  }
+
+
+}

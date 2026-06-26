@@ -13,6 +13,9 @@ import { ListPlanesEjercicio } from './components/plan-ejercicio/list-planes-eje
 import { AddPlanesEjercicio } from './components/plan-ejercicio/add-planes-ejercicio/add-planes-ejercicio';
 import { AddEstadistica } from './components/estadistica/add-estadistica/add-estadistica';
 import { ListEstadistica } from './components/estadistica/list-estadistica/list-estadistica';
+import { Login } from './components/login/login';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor';
 
 @NgModule({
   declarations: [
@@ -24,9 +27,10 @@ import { ListEstadistica } from './components/estadistica/list-estadistica/list-
     AddPlanesEjercicio,
     AddEstadistica,
     ListEstadistica,
+    Login,
   ],
-  imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule],
-  providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter()],
+  imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter(), provideHttpClient(withInterceptors([autorizacionInterceptor]))],
   bootstrap: [App],
 })
 export class AppModule {}
