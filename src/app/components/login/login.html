@@ -1,0 +1,18 @@
+<h2>VitalMovs</h2>
+<form  [formGroup]="loginForm">
+
+    <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username">
+        </mat-form-field>
+    <br>
+    <br>
+        <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password">
+        </mat-form-field>
+    <br>
+    <br>
+<button matButton="filled" (click)="Login()">Ingresar</button>
+
+</form>
