@@ -123,7 +123,7 @@
           <button
             mat-stroked-button
             class="btn-texto-morado"
-            *ngIf="fisioterapeutaId !== 0"
+            *ngIf="rol === 'ROLE_FISIOTERAPEUTA'"
             (click)="editarPlan(plan.id)">
             Editar plan
           </button>

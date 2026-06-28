@@ -12,7 +12,7 @@
       <button
           mat-stroked-button
           class="btn-texto-morado"
-        *ngIf="fisioterapeutaId !== 0"
+        *ngIf="rol === 'ROLE_FISIOTERAPEUTA'"
         (click)="agregarEjercicio()">
         Agregar ejercicio
       </button>
@@ -74,7 +74,7 @@
                 </p>
 
                 <!-- Acciones solo para fisioterapeuta -->
-                <div class="card-actions" *ngIf="fisioterapeutaId !== 0">
+                <div class="card-actions" *ngIf="rol === 'ROLE_FISIOTERAPEUTA'">
 
                   <button
                     mat-stroked-button
@@ -93,7 +93,7 @@
                 </div>
 
                 <!-- Acción solo para paciente -->
-                <div class="card-actions" *ngIf="fisioterapeutaId === 0">
+                <div class="card-actions" *ngIf="rol === 'ROLE_PACIENTE'">
 
                   <ng-container *ngIf="obtenerEstadistica(ejercicio.id) as estadistica; else sinEstadistica">
                     <button

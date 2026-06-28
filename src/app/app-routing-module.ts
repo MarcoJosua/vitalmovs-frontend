@@ -15,7 +15,6 @@ const routes: Routes = [
   {path: "login", component:Login},
 
   {path: "home", component:ListPlanes, canActivate:[consultarGuard]},
-
   {path: "plan-rehabilitacion/list-planes", component:ListPlanes, canActivate:[consultarGuard]},
   {path: 'plan-rehabilitacion/agregar/:asignacionId', component: AddPlanes, canActivate:[grabarGuard]},
   {path: 'plan-rehabilitacion/editar/:planId', component: AddPlanes, canActivate:[grabarGuard]},

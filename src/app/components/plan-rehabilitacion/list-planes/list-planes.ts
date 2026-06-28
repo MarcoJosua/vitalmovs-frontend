@@ -20,14 +20,13 @@ export class ListPlanes {
 
   rol: string = 'ROLE_FISIOTERAPEUTA'; // ROLE_PACIENTE // ROLE_FISIOTERAPEUTA
   userId: number = 5;
-  fisioterapeutaId: number = 1;
 
-  // Paciente 1 -> userId 2 / pacienteId 1
-  // Paciente 2 -> userId 3 / pacienteId 2
-  // Paciente 3 -> userId 4 / pacienteId 3
-  // Fisio 1 -> userId 5 / fisioterapeutaId 1
-  // Fisio 2 -> userId 6 / fisioterapeutaId 2
-  // Fisio 3 -> userId 7 / fisioterapeutaId 3
+  // Paciente 1 -> userId 2
+  // Paciente 2 -> userId 3 
+  // Paciente 3 -> userId 4
+  // Fisio 1 -> userId 5 
+  // Fisio 2 -> userId 6 
+  // Fisio 3 -> userId 7 
 
   constructor(
     private planRehabilitacionService: PlanRehabilitacionService,
@@ -37,34 +36,38 @@ export class ListPlanes {
   ) {}
 
   ngOnInit(): void {
-  (window as any).listPlanes = this;
-  this.CargaLista();
-}
+
+    (window as any).listPlanes = this;
+    this.CargaLista();
+  }
 
   CargaLista(): void {
-      this.planRehabilitacionService.findByUserId(this.userId).subscribe({
-        next: (data: PlanRehabilitacionDTO[]) => {
-          this.planes = data;
-          this.finalizarPlan();
-          this.cdr.detectChanges();
-        },
-        error: (err) => {
-        }
-      });
+    this.planRehabilitacionService.findByUserId(this.userId).subscribe({
+      next: (data: PlanRehabilitacionDTO[]) => {
+        this.planes = data;
+        this.finalizarPlan();
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log('ERROR AL CARGAR PLANES:', err);
+      }
+    });
 
-      this.asignacionService.findByFisioterapeutaId(this.fisioterapeutaId).subscribe({
+    if (this.rol === 'ROLE_FISIOTERAPEUTA') {
+      this.asignacionService.findByFisioterapeutaId(this.userId).subscribe({
         next: (data: AsignacionDTO[]) => {
           this.asignacionesAceptadasSinPlan = data.filter(a =>
             a.estado === 'ACEPTADO' &&
-            a.planRehabilitacionId == null &&
-            a.fisioterapeutaId === this.fisioterapeutaId
+            a.planRehabilitacionId == null
           );
 
           this.cdr.detectChanges();
         },
         error: (err) => {
+          console.log('ERROR AL CARGAR ASIGNACIONES:', err);
         }
       });
+    }
   }
 
   crearPlan(asignacionId: number): void {

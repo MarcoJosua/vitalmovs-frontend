@@ -23,11 +23,7 @@ export class ListPlanesEjercicio {
 
   filas: number[] = [];
 
-  // Paciente -> fisioterapeutaId 0
-  // Fisio 1 -> fisioterapeutaId 1
-  // Fisio 2 -> fisioterapeutaId 2
-  // Fisio 3 -> fisioterapeutaId 3
-  fisioterapeutaId: number = 0;
+  rol: string = 'ROLE_FISIOTERAPEUTA'; // ROLE_PACIENTE // ROLE_FISIOTERAPEUTA
 
   constructor(
     private planEjercicioService: PlanEjercicioService,
