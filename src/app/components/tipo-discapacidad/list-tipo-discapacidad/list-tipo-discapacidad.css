@@ -1,0 +1,16 @@
+.contenedor {
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 16px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+table {
+  width: 100%;
+}
