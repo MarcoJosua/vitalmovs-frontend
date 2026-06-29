@@ -1,0 +1,17 @@
+.contenedor-form {
+  max-width: 500px;
+  margin: 24px auto;
+  padding: 16px;
+}
+
+.campo-completo {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.acciones-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
