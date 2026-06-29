@@ -32,8 +32,8 @@ export class ListFisioDiscapacidadComponent implements OnInit {
   }
 
   agregar(): void {
-    this.router.navigate(['/fisioterapeutas', this.fisioterapeutaId, 'discapacidades', 'nueva']);
-  }
+  this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad', 'agregar']);
+}
 
   eliminar(id: number): void {
     if (confirm('¿Eliminar esta discapacidad del fisioterapeuta?')) {
@@ -43,8 +43,7 @@ export class ListFisioDiscapacidadComponent implements OnInit {
       });
     }
   }
-
   volver(): void {
-    this.router.navigate(['/fisioterapeutas']);
-  }
+  this.router.navigate(['/fisioterapeuta/list-fisioterapeutas']);
+}
 }
