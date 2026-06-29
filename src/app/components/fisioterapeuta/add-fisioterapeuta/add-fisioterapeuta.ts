@@ -27,15 +27,13 @@ export class AddFisioterapeutaComponent {
       this.fisioterapeuta.userId = parsed.id;
     }
   }
-
   guardar(): void {
-    this.fisioterapeutaService.add(this.fisioterapeuta).subscribe({
-      next: () => this.router.navigate(['/fisioterapeutas']),
-      error: (err) => console.error('Error al guardar fisioterapeuta', err)
-    });
-  }
-
-  cancelar(): void {
-    this.router.navigate(['/fisioterapeutas']);
-  }
+  this.fisioterapeutaService.add(this.fisioterapeuta).subscribe({
+    next: () => this.router.navigate(['/fisioterapeuta/list-fisioterapeutas']),
+    error: (err) => console.error('Error al guardar', err)
+  });
+}
+cancelar(): void {
+  this.router.navigate(['/fisioterapeuta/list-fisioterapeutas']);
+}
 }
