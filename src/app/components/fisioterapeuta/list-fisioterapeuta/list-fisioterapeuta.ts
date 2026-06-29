@@ -29,12 +29,12 @@ export class ListFisioterapeutaComponent implements OnInit {
   }
 
   editar(id: number): void {
-    this.router.navigate(['/fisioterapeutas/editar', id]);
-  }
+  this.router.navigate(['/fisioterapeuta/editar', id]);
+}
 
-  verDiscapacidades(id: number): void {
-    this.router.navigate(['/fisioterapeutas', id, 'discapacidades']);
-  }
+verDiscapacidades(id: number): void {
+  this.router.navigate(['/fisioterapeuta', id, 'discapacidad']);
+}
 
   eliminar(id: number): void {
     if (confirm('¿Seguro que deseas eliminar este fisioterapeuta?')) {
