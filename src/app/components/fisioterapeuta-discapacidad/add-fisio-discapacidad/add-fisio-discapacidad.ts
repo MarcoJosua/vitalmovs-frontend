@@ -36,20 +36,19 @@ export class AddFisioDiscapacidadComponent implements OnInit {
         error: (err) => console.error('Error al cargar tipos de discapacidad', err)
       });
   }
-
+  
   guardar(): void {
-    if (!this.tipoSeleccionadoId) return;
-    const dto: FisioterapeutaDiscapacidad = {
-      fisioterapeutaId: this.fisioterapeutaId,
-      tipoDiscapacidadId: this.tipoSeleccionadoId
-    };
-    this.fdService.add(dto).subscribe({
-      next: () => this.router.navigate(['/fisioterapeutas', this.fisioterapeutaId, 'discapacidades']),
-      error: (err) => console.error('Error al guardar', err)
-    });
-  }
-
-  cancelar(): void {
-    this.router.navigate(['/fisioterapeutas', this.fisioterapeutaId, 'discapacidades']);
-  }
+  if (!this.tipoSeleccionadoId) return;
+  const dto: FisioterapeutaDiscapacidad = {
+    fisioterapeutaId: this.fisioterapeutaId,
+    tipoDiscapacidadId: this.tipoSeleccionadoId
+  };
+  this.fdService.add(dto).subscribe({
+    next: () => this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad']),
+    error: (err) => console.error('Error al guardar', err)
+  });
+}
+cancelar(): void {
+  this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad']);
+}
 }
