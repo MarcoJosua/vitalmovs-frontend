@@ -12,8 +12,8 @@ interface TipoDiscapacidad {
 
 @Component({
   selector: 'app-add-fisio-discapacidad',
-  templateUrl: './add-fisio-discapacidad.component.html',
-  styleUrls: ['./add-fisio-discapacidad.component.css']
+  templateUrl: './add-fisio-discapacidad.html',
+  styleUrls: ['./add-fisio-discapacidad.css']
 })
 export class AddFisioDiscapacidadComponent implements OnInit {
 
