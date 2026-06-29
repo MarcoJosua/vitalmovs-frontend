@@ -22,6 +22,7 @@ import { BuscarFisioterapeutaComponent }  from './components/fisioterapeuta/busc
 import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad.component';
 import { AddFisioDiscapacidadComponent }  from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad.component';
 
+
 const routes: Routes = [
   {path: "", component:Login},
   {path: "login", component:Login},
@@ -45,6 +46,12 @@ const routes: Routes = [
   {path: 'paciente/:pacienteId/discapacidad', component: ListPacienteDiscapacidad, canActivate:[consultarGuard]},
   {path: 'paciente/:pacienteId/discapacidad/agregar', component: AddPacienteDiscapacidad, canActivate:[grabarGuard]},
   {path: 'paciente/:pacienteId/discapacidad/editar/:pacienteDiscapacidadId', component: AddPacienteDiscapacidad, canActivate:[grabarGuard]},
+  {path: 'fisioterapeuta/list-fisioterapeutas', component: ListFisioterapeutaComponent, canActivate: [consultarGuard]},
+  {path: 'fisioterapeuta/agregar', component: AddFisioterapeutaComponent, canActivate: [grabarGuard]},
+  {path: 'fisioterapeuta/editar/:fisioterapeutaId', component: EditFisioterapeutaComponent, canActivate: [grabarGuard]},
+  {path: 'fisioterapeuta/buscar', component: BuscarFisioterapeutaComponent, canActivate: [consultarGuard]},
+  {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad', component: ListFisioDiscapacidadComponent, canActivate: [consultarGuard]},
+  {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad/agregar', component: AddFisioDiscapacidadComponent, canActivate: [grabarGuard]},
 
 
 ];
