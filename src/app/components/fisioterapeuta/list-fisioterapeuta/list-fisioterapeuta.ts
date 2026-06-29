@@ -5,7 +5,8 @@ import { FisioterapeutaService } from '../../services/fisioterapeuta.service';
 
 @Component({
   selector: 'app-list-fisioterapeuta',
-  templateUrl: './list-fisioterapeuta.component.html'
+  templateUrl: './list-fisioterapeuta.component.html',
+  styleUrls: ['./list-fisioterapeuta.component.css']
 })
 export class ListFisioterapeutaComponent implements OnInit {
 
