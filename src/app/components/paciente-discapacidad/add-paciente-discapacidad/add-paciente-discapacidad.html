@@ -1,0 +1,16 @@
+<div class="contenedor-form">
+  <h2>Discapacidades del paciente</h2>
+
+  <div class="lista-checkbox">
+    <mat-checkbox
+      *ngFor="let opcion of opciones"
+      [(ngModel)]="opcion.marcado">
+      {{ opcion.tipo.nombre }} — {{ opcion.tipo.descripcion }}
+    </mat-checkbox>
+  </div>
+
+  <div class="acciones-form">
+    <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
+    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  </div>
+</div>
