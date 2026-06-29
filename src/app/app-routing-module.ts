@@ -15,6 +15,12 @@ import { ListPacienteComponent } from './components/paciente/list-paciente/list-
 import { AddPacienteComponent } from './components/paciente/add-paciente/add-paciente';
 import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
 import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
+import { ListFisioterapeutaComponent }    from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta.component';
+import { AddFisioterapeutaComponent }     from './components/fisioterapeuta/add-fisioterapeuta/add-fisioterapeuta.component';
+import { EditFisioterapeutaComponent }    from './components/fisioterapeuta/edit-fisioterapeuta/edit-fisioterapeuta.component';
+import { BuscarFisioterapeutaComponent }  from './components/fisioterapeuta/buscar-fisioterapeuta/buscar-fisioterapeuta.component';
+import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad.component';
+import { AddFisioDiscapacidadComponent }  from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad.component';
 
 const routes: Routes = [
   {path: "", component:Login},
@@ -39,6 +45,7 @@ const routes: Routes = [
   {path: 'paciente/:pacienteId/discapacidad', component: ListPacienteDiscapacidad, canActivate:[consultarGuard]},
   {path: 'paciente/:pacienteId/discapacidad/agregar', component: AddPacienteDiscapacidad, canActivate:[grabarGuard]},
   {path: 'paciente/:pacienteId/discapacidad/editar/:pacienteDiscapacidadId', component: AddPacienteDiscapacidad, canActivate:[grabarGuard]},
+
 
 ];
 
