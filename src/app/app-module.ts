@@ -22,13 +22,12 @@ import { AddPacienteComponent } from './components/paciente/add-paciente/add-pac
 import { ListPacienteComponent } from './components/paciente/list-paciente/list-paciente';
 import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
 import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
-import { ListFisioterapeutaComponent }    from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta.component';
-import { AddFisioterapeutaComponent }     from './components/fisioterapeuta/add-fisioterapeuta/add-fisioterapeuta.component';
-import { EditFisioterapeutaComponent }    from './components/fisioterapeuta/edit-fisioterapeuta/edit-fisioterapeuta.component';
-import { BuscarFisioterapeutaComponent }  from './components/fisioterapeuta/buscar-fisioterapeuta/buscar-fisioterapeuta.component';
-import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad.component';
-import { AddFisioDiscapacidadComponent }  from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad.component';
-
+import { ListFisioterapeutaComponent } from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta.component';
+import { AddFisioterapeutaComponent } from './components/fisioterapeuta/add-fisioterapeuta/add-fisioterapeuta.component'; 
+import { EditFisioterapeutaComponent } from './components/fisioterapeuta/edit-fisioterapeuta/edit-fisioterapeuta.component'; 
+import { BuscarFisioterapeutaComponent } from './components/fisioterapeuta/buscar-fisioterapeuta/buscar-fisioterapeuta.component';
+import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad.component'; 
+import { AddFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad.component';
 
 @NgModule({
   declarations: [
