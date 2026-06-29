@@ -5,8 +5,8 @@ import { FisioterapeutaDiscapacidadService } from '../../services/fisioterapeuta
 
 @Component({
   selector: 'app-list-fisio-discapacidad',
-  templateUrl: './list-fisio-discapacidad.component.html',
-  styleUrls: ['./list-fisio-discapacidad.component.css']
+  templateUrl: './list-fisio-discapacidad.html',
+  styleUrls: ['./list-fisio-discapacidad.css']
 })
 export class ListFisioDiscapacidadComponent implements OnInit {
 
