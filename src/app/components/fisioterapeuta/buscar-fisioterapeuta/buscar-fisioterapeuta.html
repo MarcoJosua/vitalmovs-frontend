@@ -1,47 +1,45 @@
-<div class="container mt-4">
-  <h2>Buscar Fisioterapeuta</h2>
+<div class="page-wrapper">
+  <h2 class="page-title">Buscar Fisioterapeuta</h2>
 
-  <div class="row g-2 mb-3">
-    <div class="col-md-5">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Buscar por nombre o apellido..."
-               [(ngModel)]="textoBusqueda">
-        <button class="btn btn-primary" (click)="buscarPorNombre()">Buscar</button>
-      </div>
+  <div class="search-bar">
+    <div class="input-group">
+      <input type="text" class="search-input" placeholder="Buscar por nombre o apellido..."
+             [(ngModel)]="textoBusqueda">
+      <button class="btn btn-primary" (click)="buscarPorNombre()">Buscar</button>
     </div>
-    <div class="col-md-5">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Buscar por especialidad..."
-               [(ngModel)]="especialidadBusqueda">
-        <button class="btn btn-outline-primary" (click)="buscarPorEspecialidad()">Filtrar</button>
-      </div>
+
+    <div class="input-group">
+      <input type="text" class="search-input" placeholder="Buscar por especialidad..."
+             [(ngModel)]="especialidadBusqueda">
+      <button class="btn btn-outline" (click)="buscarPorEspecialidad()">Filtrar</button>
     </div>
-    <div class="col-md-2">
-      <button class="btn btn-secondary w-100" (click)="limpiar()">Limpiar</button>
-    </div>
+
+    <button class="btn btn-secondary" (click)="limpiar()">Limpiar</button>
   </div>
 
   <div *ngIf="buscado">
-    <table class="table table-bordered table-hover" *ngIf="resultados.length > 0; else sinResultados">
-      <thead class="table-dark">
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Especialidad</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let f of resultados">
-          <td>{{ f.id }}</td>
-          <td>{{ f.nombre }}</td>
-          <td>{{ f.apellido }}</td>
-          <td>{{ f.especialidad }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table-wrapper" *ngIf="resultados.length > 0; else sinResultados">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Especialidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let f of resultados">
+            <td>{{ f.id }}</td>
+            <td>{{ f.nombre }}</td>
+            <td>{{ f.apellido }}</td>
+            <td><span class="badge">{{ f.especialidad }}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <ng-template #sinResultados>
-      <p class="text-muted">No se encontraron resultados.</p>
+      <p class="empty-msg">No se encontraron resultados.</p>
     </ng-template>
   </div>
 </div>
