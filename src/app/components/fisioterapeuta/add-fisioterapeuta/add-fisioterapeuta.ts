@@ -5,8 +5,8 @@ import { FisioterapeutaService } from '../../services/fisioterapeuta.service';
 
 @Component({
   selector: 'app-add-fisioterapeuta',
-  templateUrl: './add-fisioterapeuta.component.html',
-  styleUrls: ['./add-fisioterapeuta.component.css']
+  templateUrl: './add-fisioterapeuta.html',
+  styleUrls: ['./add-fisioterapeuta.css']
 })
 export class AddFisioterapeutaComponent {
 
