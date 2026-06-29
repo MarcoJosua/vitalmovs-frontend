@@ -9,6 +9,12 @@ import { ListEstadistica } from './components/estadistica/list-estadistica/list-
 import { Login } from './components/login/login';
 import { consultarGuard } from './guards/consultar-guard';
 import { grabarGuard } from './guards/grabar-guard';
+import { ListTipoDiscapacidadComponent } from './components/tipo-discapacidad/list-tipo-discapacidad/list-tipo-discapacidad';
+import { AddTipoDiscapacidadComponent } from './components/tipo-discapacidad/add-tipo-discapacidad/add-tipo-discapacidad';
+import { ListPacienteComponent } from './components/paciente/list-paciente/list-paciente';
+import { AddPacienteComponent } from './components/paciente/add-paciente/add-paciente';
+import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
+import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
 
 const routes: Routes = [
   {path: "", component:Login},
@@ -24,6 +30,16 @@ const routes: Routes = [
   {path: 'plan-rehabilitacion/:planId/plan-ejercicio/:planEjercicioId/progreso', component: AddEstadistica, canActivate:[consultarGuard]},
   {path: 'plan-rehabilitacion/:planId/plan-ejercicio/:planEjercicioId/progreso/editar/:estadisticaId', component: AddEstadistica, canActivate:[consultarGuard]},
   {path: 'plan-rehabilitacion/:planId/estadistica', component: ListEstadistica, canActivate:[consultarGuard]}
+  {path: 'tipo-discapacidad/list-tipos', component: ListTipoDiscapacidad, canActivate:[consultarGuard]},
+  {path: 'tipo-discapacidad/agregar', component: AddTipoDiscapacidad, canActivate:[grabarGuard]},
+  {path: 'tipo-discapacidad/editar/:tipoDiscapacidadId', component: AddTipoDiscapacidad, canActivate:[grabarGuard]},
+  {path: 'paciente/list-pacientes', component: ListPaciente, canActivate:[consultarGuard]},
+  {path: 'paciente/agregar', component: AddPaciente, canActivate:[grabarGuard]},
+  {path: 'paciente/editar/:pacienteId', component: AddPaciente, canActivate:[grabarGuard]},
+  {path: 'paciente/:pacienteId/discapacidad', component: ListPacienteDiscapacidad, canActivate:[consultarGuard]},
+  {path: 'paciente/:pacienteId/discapacidad/agregar', component: AddPacienteDiscapacidad, canActivate:[grabarGuard]},
+  {path: 'paciente/:pacienteId/discapacidad/editar/:pacienteDiscapacidadId', component: AddPacienteDiscapacidad, canActivate:[grabarGuard]},
+
 ];
 
 @NgModule({
