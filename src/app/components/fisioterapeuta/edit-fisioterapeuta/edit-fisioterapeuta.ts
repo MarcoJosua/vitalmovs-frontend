@@ -35,15 +35,13 @@ export class EditFisioterapeutaComponent implements OnInit {
       error: (err) => console.error('Error al cargar fisioterapeuta', err)
     });
   }
-
-  guardar(): void {
-    this.fisioterapeutaService.update(this.fisioterapeuta).subscribe({
-      next: () => this.router.navigate(['/fisioterapeutas']),
-      error: (err) => console.error('Error al actualizar', err)
-    });
-  }
-
-  cancelar(): void {
-    this.router.navigate(['/fisioterapeutas']);
-  }
+guardar(): void {
+  this.fisioterapeutaService.update(this.fisioterapeuta).subscribe({
+    next: () => this.router.navigate(['/fisioterapeuta/list-fisioterapeutas']),
+    error: (err) => console.error('Error al actualizar', err)
+  });
+}
+cancelar(): void {
+  this.router.navigate(['/fisioterapeuta/list-fisioterapeutas']);
+}
 }
