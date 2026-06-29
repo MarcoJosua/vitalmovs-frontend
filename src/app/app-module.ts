@@ -22,6 +22,12 @@ import { AddPacienteComponent } from './components/paciente/add-paciente/add-pac
 import { ListPacienteComponent } from './components/paciente/list-paciente/list-paciente';
 import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
 import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
+import { ListFisioterapeutaComponent }    from './components/list-fisioterapeuta/list-fisioterapeuta.component';
+import { AddFisioterapeutaComponent }     from './components/add-fisioterapeuta/add-fisioterapeuta.component';
+import { EditFisioterapeutaComponent }    from './components/edit-fisioterapeuta/edit-fisioterapeuta.component';
+import { BuscarFisioterapeutaComponent }  from './components/buscar-fisioterapeuta/buscar-fisioterapeuta.component';
+import { ListFisioDiscapacidadComponent } from './components/list-fisio-discapacidad/list-fisio-discapacidad.component';
+import { AddFisioDiscapacidadComponent }  from './components/add-fisio-discapacidad/add-fisio-discapacidad.component';
 
 
 @NgModule({
@@ -40,7 +46,13 @@ import { ListPacienteDiscapacidadComponent } from './components/paciente-discapa
     AddPacienteComponent,
     ListPacienteComponent,
     AddPacienteDiscapacidadComponent,
-    ListPacienteDiscapacidadComponent
+    ListPacienteDiscapacidadComponent,
+    ListFisioterapeutaComponent,
+    AddFisioterapeutaComponent,
+    EditFisioterapeutaComponent,
+    BuscarFisioterapeutaComponent,
+    ListFisioDiscapacidadComponent,
+    AddFisioDiscapacidadComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter(), provideHttpClient(withInterceptors([autorizacionInterceptor]))],
