@@ -1,0 +1,145 @@
+.page-wrapper {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #3b82f6;
+  border: 2px solid #3b82f6;
+}
+
+.btn-outline:hover {
+  background-color: #eff6ff;
+}
+
+.table-wrapper {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table thead tr {
+  background-color: #1e293b;
+  color: white;
+}
+
+.data-table th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.data-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.badge {
+  background-color: #eff6ff;
+  color: #2563eb;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.btn-action {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-info {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.btn-info:hover { background-color: #bae6fd; }
+
+.btn-warning {
+  background-color: #fef9c3;
+  color: #a16207;
+}
+
+.btn-warning:hover { background-color: #fef08a; }
+
+.btn-danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.btn-danger:hover { background-color: #fecaca; }
+
+.empty-row {
+  text-align: center;
+  color: #94a3b8;
+  padding: 2rem;
+  font-style: italic;
+}
