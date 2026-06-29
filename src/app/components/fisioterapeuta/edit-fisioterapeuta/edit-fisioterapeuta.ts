@@ -5,8 +5,8 @@ import { FisioterapeutaService } from '../../services/fisioterapeuta.service';
 
 @Component({
   selector: 'app-edit-fisioterapeuta',
-  templateUrl: './edit-fisioterapeuta.component.html',
-  styleUrls: ['./edit-fisioterapeuta.component.css']
+  templateUrl: './edit-fisioterapeuta.html',
+  styleUrls: ['./edit-fisioterapeuta.css']
 })
 export class EditFisioterapeutaComponent implements OnInit {
 
