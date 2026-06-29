@@ -16,6 +16,13 @@ import { ListEstadistica } from './components/estadistica/list-estadistica/list-
 import { Login } from './components/login/login';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor';
+import { AddTipoDiscapacidadComponent } from './components/tipo-discapacidad/add-tipo-discapacidad/add-tipo-discapacidad';
+import { ListTipoDiscapacidadComponent } from './components/tipo-discapacidad/list-tipo-discapacidad/list-tipo-discapacidad';
+import { AddPacienteComponent } from './components/paciente/add-paciente/add-paciente';
+import { ListPacienteComponent } from './components/paciente/list-paciente/list-paciente';
+import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
+import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +35,12 @@ import { autorizacionInterceptor } from './interceptors/autorizacion-interceptor
     AddEstadistica,
     ListEstadistica,
     Login,
+    AddTipoDiscapacidadComponent,
+    ListTipoDiscapacidadComponent,
+    AddPacienteComponent,
+    ListPacienteComponent,
+    AddPacienteDiscapacidadComponent,
+    ListPacienteDiscapacidadComponent
   ],
   imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter(), provideHttpClient(withInterceptors([autorizacionInterceptor]))],
