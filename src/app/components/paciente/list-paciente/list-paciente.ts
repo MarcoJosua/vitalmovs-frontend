@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Paciente } from '../../../models/paciente';
-import { PacienteService } from '../../../services/paciente.service';
+import { PacienteService } from '../../../services/paciente-services';
+import { Paciente } from '../../../models/pacienteDTO';
+
 
 @Component({
   selector: 'app-list-paciente',
   templateUrl: './list-paciente.html',
+  standalone: false,
   styleUrls: ['./list-paciente.css']
 })
 export class ListPacienteComponent implements OnInit {

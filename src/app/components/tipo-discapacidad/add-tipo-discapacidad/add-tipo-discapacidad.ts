@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad.service';
+import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad-services';
+
 
 @Component({
   selector: 'app-add-tipo-discapacidad',
   templateUrl: './add-tipo-discapacidad.html',
+  standalone: false,
   styleUrls: ['./add-tipo-discapacidad.css']
 })
 export class AddTipoDiscapacidadComponent implements OnInit {

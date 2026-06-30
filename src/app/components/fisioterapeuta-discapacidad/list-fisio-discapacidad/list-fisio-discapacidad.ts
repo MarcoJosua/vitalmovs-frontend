@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FisioterapeutaDiscapacidad } from '../../models/fisioterapeuta-discapacidad.model';
-import { FisioterapeutaDiscapacidadService } from '../../services/fisioterapeuta-discapacidad.service';
+import { FisioterapeutaDiscapacidad } from '../../../models/FisioterapeutaDiscapacidadDTO';
+import { FisioterapeutaDiscapacidadService } from '../../../services/Fisioterapeuta-Discapacidad-service';
 
 @Component({
   selector: 'app-list-fisio-discapacidad',
   templateUrl: './list-fisio-discapacidad.html',
+  standalone: false,
   styleUrls: ['./list-fisio-discapacidad.css']
 })
 export class ListFisioDiscapacidadComponent implements OnInit {

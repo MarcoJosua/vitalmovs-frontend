@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FisioterapeutaDiscapacidad } from '../../models/fisioterapeuta-discapacidad.model';
-import { FisioterapeutaDiscapacidadService } from '../../services/fisioterapeuta-discapacidad.service';
+import { FisioterapeutaDiscapacidadService } from '../../../services/Fisioterapeuta-Discapacidad-service';
+import { FisioterapeutaDiscapacidad } from '../../../models/FisioterapeutaDiscapacidadDTO';
+
 
 interface TipoDiscapacidad {
   id: number;
@@ -13,6 +14,7 @@ interface TipoDiscapacidad {
 @Component({
   selector: 'app-add-fisio-discapacidad',
   templateUrl: './add-fisio-discapacidad.html',
+  standalone: false,
   styleUrls: ['./add-fisio-discapacidad.css']
 })
 export class AddFisioDiscapacidadComponent implements OnInit {

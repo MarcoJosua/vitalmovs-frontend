@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Fisioterapeuta } from '../models/fisioterapeuta.model';
+import { Fisioterapeuta } from '../models/FisioterapeutaDTO';
+
 
 @Injectable({
   providedIn: 'root'

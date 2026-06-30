@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { Fisioterapeuta } from '../../models/fisioterapeuta.model';
-import { FisioterapeutaService } from '../../services/fisioterapeuta.service';
+import { Fisioterapeuta } from '../../../models/FisioterapeutaDTO';
+import { FisioterapeutaService } from '../../../services/Fisioterapeuta-service';
+
 
 @Component({
   selector: 'app-buscar-fisioterapeuta',
+  standalone: false,
   templateUrl: './buscar-fisioterapeuta.html',
   styleUrls: ['./buscar-fisioterapeuta.css']
 })

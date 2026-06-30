@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TipoDiscapacidad } from '../../../models/tipo-discapacidad';
-import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad.service';
+import { TipoDiscapacidad } from '../../../models/tipodiscapacidadDTO';
+import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad-services';
+
 
 @Component({
   selector: 'app-list-tipo-discapacidad',
   templateUrl: './list-tipo-discapacidad.html',
+  standalone: false,
   styleUrls: ['./list-tipo-discapacidad.css']
 })
 export class ListTipoDiscapacidadComponent implements OnInit {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { PacienteDiscapacidad } from '../../../models/paciente-discapacidad';
-import { TipoDiscapacidad } from '../../../models/tipo-discapacidad';
-import { PacienteDiscapacidadService } from '../../../services/paciente-discapacidad.service';
-import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad.service';
+import { PacienteDiscapacidad } from '../../../models/pacientediscapacidadDTO';
+import { PacienteDiscapacidadService } from '../../../services/paciente-discapacidad-services';
+import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad-services';
+import { TipoDiscapacidad } from '../../../models/tipodiscapacidadDTO';
+
 
 interface FilaDiscapacidad extends PacienteDiscapacidad {
   nombreTipo?: string;
@@ -13,6 +14,7 @@ interface FilaDiscapacidad extends PacienteDiscapacidad {
 @Component({
   selector: 'app-list-paciente-discapacidad',
   templateUrl: './list-paciente-discapacidad.html',
+  standalone: false,
   styleUrls: ['./list-paciente-discapacidad.css']
 })
 export class ListPacienteDiscapacidadComponent implements OnInit {

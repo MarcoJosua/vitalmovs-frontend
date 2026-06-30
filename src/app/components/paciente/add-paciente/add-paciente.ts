@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PacienteService } from '../../../services/paciente.service';
+import { PacienteService } from '../../../services/paciente-services';
+
 
 @Component({
   selector: 'app-add-paciente',
   templateUrl: './add-paciente.html',
+  standalone: false,
   styleUrls: ['./add-paciente.css']
 })
 export class AddPacienteComponent implements OnInit {

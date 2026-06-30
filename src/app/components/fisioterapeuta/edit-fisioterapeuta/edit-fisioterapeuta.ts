@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Fisioterapeuta } from '../../models/fisioterapeuta.model';
-import { FisioterapeutaService } from '../../services/fisioterapeuta.service';
+import { Fisioterapeuta } from '../../../models/FisioterapeutaDTO';
+import { FisioterapeutaService } from '../../../services/Fisioterapeuta-service';
+
 
 @Component({
   selector: 'app-edit-fisioterapeuta',
   templateUrl: './edit-fisioterapeuta.html',
+  standalone: false,
   styleUrls: ['./edit-fisioterapeuta.css']
 })
 export class EditFisioterapeutaComponent implements OnInit {

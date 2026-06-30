@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TipoDiscapacidad } from '../models/tipo-discapacidad';
+import { TipoDiscapacidad } from '../models/tipodiscapacidadDTO';
+
 
 @Injectable({ providedIn: 'root' })
 export class TipoDiscapacidadService {

@@ -1,5 +1,5 @@
 export interface PacienteDiscapacidad {
-  id: number;
+  id?: number;
   tipoDiscapacidadId: number;
   pacienteId: number;
 }

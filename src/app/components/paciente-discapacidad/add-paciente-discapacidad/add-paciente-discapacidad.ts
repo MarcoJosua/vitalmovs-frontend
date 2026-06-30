@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
-import { TipoDiscapacidad } from '../../../models/tipo-discapacidad';
-import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad.service';
-import { PacienteDiscapacidadService } from '../../../services/paciente-discapacidad.service';
+import { TipoDiscapacidad } from '../../../models/tipodiscapacidadDTO';
+import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad-services';
+import { PacienteDiscapacidadService } from '../../../services/paciente-discapacidad-services';
+
 
 interface OpcionDiscapacidad {
   tipo: TipoDiscapacidad;
@@ -14,6 +15,7 @@ interface OpcionDiscapacidad {
 @Component({
   selector: 'app-add-paciente-discapacidad',
   templateUrl: './add-paciente-discapacidad.html',
+  standalone: false,
   styleUrls: ['./add-paciente-discapacidad.css']
 })
 export class AddPacienteDiscapacidadComponent implements OnInit {
