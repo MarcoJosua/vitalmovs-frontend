@@ -5,6 +5,7 @@ import { PlanEjercicioService } from '../../../services/plan-ejercicio-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EstadisticaDTO } from '../../../models/EstadisticaDTO';
 import { EstadisticaService } from '../../../services/estadistica-service';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-list-planes-ejercicio',
@@ -23,18 +24,20 @@ export class ListPlanesEjercicio {
 
   filas: number[] = [];
 
-  rol: string = 'ROLE_FISIOTERAPEUTA'; // ROLE_PACIENTE // ROLE_FISIOTERAPEUTA
+  rol: string = '';
 
   constructor(
     private planEjercicioService: PlanEjercicioService,
     private estadisticaService: EstadisticaService,
     private activatedRoute: ActivatedRoute,
+    private userService: UserService,
     private router: Router,
     private snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.rol = this.userService.getAuthoritiesLogeado();
     this.planId = Number(this.activatedRoute.snapshot.paramMap.get('planId'));
     this.CargaLista();
     this.CargarEstadisticas();

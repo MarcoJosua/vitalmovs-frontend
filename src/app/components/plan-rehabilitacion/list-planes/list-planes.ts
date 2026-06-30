@@ -5,6 +5,7 @@ import { PlanRehabilitacionService } from '../../../services/plan-rehabilitacion
 import { AsignacionService } from '../../../services/asignacion-service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from '../../../services/user-service';
 
 @Component({
   selector: 'app-list-planes',
@@ -18,9 +19,8 @@ export class ListPlanes {
   asignaciones: AsignacionDTO[] = [];
   asignacionesAceptadasSinPlan: AsignacionDTO[] = [];
 
-  rol: string = 'ROLE_FISIOTERAPEUTA'; // ROLE_PACIENTE // ROLE_FISIOTERAPEUTA
-  userId: number = 5;
-
+  rol: string = '';
+  userId: number = 0;
   // Paciente 1 -> userId 2
   // Paciente 2 -> userId 3 
   // Paciente 3 -> userId 4
@@ -31,11 +31,17 @@ export class ListPlanes {
   constructor(
     private planRehabilitacionService: PlanRehabilitacionService,
     private asignacionService: AsignacionService,
+    private userService: UserService,
     private router: Router,
     private snackBar: MatSnackBar, private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.userService.getIdLogeado();
+    this.rol = this.userService.getAuthoritiesLogeado();
+
+    console.log('USER ID LOGUEADO:', this.userId);
+    console.log('ROL LOGUEADO:', this.rol);
 
     (window as any).listPlanes = this;
     this.CargaLista();
@@ -49,7 +55,6 @@ export class ListPlanes {
         this.cdr.detectChanges();
       },
       error: (err) => {
-        console.log('ERROR AL CARGAR PLANES:', err);
       }
     });
 

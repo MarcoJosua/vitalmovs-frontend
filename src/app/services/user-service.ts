@@ -28,20 +28,20 @@ export class UserService {
       );
   }
 
-  logout(){
+  logout() {
     localStorage.clear();
   }
 
-  getIdLogeado() {
-    return localStorage.getItem("id");
+  getIdLogeado(): number {
+    return Number(localStorage.getItem("id"));
   }
 
-  getAuthoritiesLogeado() {
-    return localStorage.getItem("authorities");
+  getAuthoritiesLogeado(): string {
+    return localStorage.getItem("authorities") || "";
   }
 
-  getJwtTokenLogeado() {
-    return localStorage.getItem("jwtToken");
+  getJwtTokenLogeado(): string {
+    return localStorage.getItem("jwtToken") || "";
   }
 
 
