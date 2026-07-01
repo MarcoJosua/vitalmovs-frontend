@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { PlanRehabilitacionDTO } from '../../../models/PlanRehabilitacionDTO';
 import { AsignacionDTO } from '../../../models/AsignacionDTO';
 import { PlanRehabilitacionService } from '../../../services/plan-rehabilitacion-service';
@@ -51,29 +52,63 @@ export class ListPlanes {
     this.planRehabilitacionService.findByUserId(this.userId).subscribe({
       next: (data: PlanRehabilitacionDTO[]) => {
         this.planes = data;
+        this.agregarNombresAPlanes();
         this.finalizarPlan();
         this.cdr.detectChanges();
       },
-      error: (err) => {
+      error: (err: any) => {
       }
     });
 
     if (this.rol === 'ROLE_FISIOTERAPEUTA') {
       this.asignacionService.findByFisioterapeutaId(this.userId).subscribe({
         next: (data: AsignacionDTO[]) => {
-          this.asignacionesAceptadasSinPlan = data.filter(a =>
-            a.estado === 'ACEPTADO' &&
-            a.planRehabilitacionId == null
-          );
-
+          this.asignaciones = data;
+          this.asignacionesAceptadasSinPlan = data.filter(a => a.estado === 'ACEPTADO' &&a.planRehabilitacionId == null);
+          this.agregarNombresAPlanes();
           this.cdr.detectChanges();
         },
-        error: (err) => {
-          console.log('ERROR AL CARGAR ASIGNACIONES:', err);
+        error: (err: any) => {
+        }
+      });
+    }
+
+    if (this.rol === 'ROLE_PACIENTE') {
+      this.asignacionService.findByPacienteId(this.userId).subscribe({
+        next: (data: AsignacionDTO[]) => {
+          this.asignaciones = data;
+          this.agregarNombresAPlanes();
+          this.cdr.detectChanges();
+        },
+        error: (err: any) => {
         }
       });
     }
   }
+
+  agregarNombresAPlanes(): void {
+    if (this.planes.length === 0 || this.asignaciones.length === 0) {
+      return;
+    }
+
+    this.planes = this.planes.map(plan => {
+      const asignacion = this.asignaciones.find(a =>
+        a.id === plan.asignacionId ||
+        a.planRehabilitacionId === plan.id
+      );
+
+      return {
+        ...plan,
+        nombrePaciente: asignacion?.nombrePaciente,
+        nombreFisioterapeuta: asignacion?.nombreFisioterapeuta,
+        apellidoPaciente: asignacion?.apellidoPaciente,
+        apellidoFisioterapeuta: asignacion?.apellidoFisioterapeuta
+      };
+    });
+  }
+
+
+
 
   crearPlan(asignacionId: number): void {
     this.router.navigate(['/plan-rehabilitacion/agregar', asignacionId]);

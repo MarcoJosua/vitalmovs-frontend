@@ -27,7 +27,7 @@
 
       <div class="custom-card" *ngFor="let asignacion of asignacionesAceptadasSinPlan">
 
-        <h3>Paciente: {{ asignacion.nombrePaciente }}</h3>
+        <h3>Paciente: {{(asignacion.nombrePaciente || '') + ' ' + (asignacion.apellidoPaciente || '') }}</h3>
 
         <p>
           <strong>Mensaje:</strong>
@@ -75,6 +75,16 @@
       <div class="custom-card" *ngFor="let plan of planes">
 
         <h3>{{ plan.nombre }}</h3>
+
+       <p *ngIf="rol === 'ROLE_FISIOTERAPEUTA'">
+        <strong>Paciente:</strong>
+        {{ (plan.nombrePaciente || '') + ' ' + (plan.apellidoPaciente || '') }}
+      </p>
+
+      <p *ngIf="rol === 'ROLE_PACIENTE'">
+        <strong>Fisioterapeuta:</strong>
+        {{ (plan.nombreFisioterapeuta || '') + ' ' + (plan.apellidoFisioterapeuta || '') }}
+      </p>
 
         <p>
           <strong>Descripción:</strong>

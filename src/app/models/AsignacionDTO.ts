@@ -8,4 +8,6 @@ export interface AsignacionDTO {
   planRehabilitacionId: number | null;
   nombrePaciente: string;
   nombreFisioterapeuta: string;
+  apellidoPaciente: string;
+  apellidoFisioterapeuta: string;
 }

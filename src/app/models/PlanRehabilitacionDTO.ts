@@ -6,4 +6,8 @@ export interface PlanRehabilitacionDTO {
   fecha_fin: string;
   estado: string;
   asignacionId: number;
+  nombrePaciente?: string;
+  nombreFisioterapeuta?: string;
+  apellidoPaciente?: string;
+  apellidoFisioterapeuta?: string;
 }

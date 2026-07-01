@@ -21,4 +21,6 @@ export class AsignacionService {
     delete(id: number) { return this.http.delete(this.ruta_servidor + "/" + this.recurso + "/" + id.toString());}
 
     findByFisioterapeutaId(id: number) {return this.http.get<AsignacionDTO[]>(this.ruta_servidor + "/" + this.recurso + "/fisioterapeuta/" + id.toString());}
+    
+    findByPacienteId(id: number) {return this.http.get<AsignacionDTO[]>(this.ruta_servidor + "/" + this.recurso + "/paciente/" + id.toString());}
 }
