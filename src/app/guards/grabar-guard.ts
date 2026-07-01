@@ -7,7 +7,7 @@ export const grabarGuard: CanActivateFn = (route, state) => {
     let authorities = userService.getAuthoritiesLogeado();
   
     if(authorities) {
-      if (authorities.indexOf("ROLE_ADMIN")>=0 || authorities.indexOf("ROLE_FISIOTERAPEUTA")>=0) {
+      if (authorities.indexOf("ROLE_ADMIN")>=0 || authorities.indexOf("ROLE_FISIOTERAPEUTA")>=0 || authorities.indexOf("ROLE_PACIENTE")>=0) {
         return true;
       }
     }

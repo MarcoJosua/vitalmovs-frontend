@@ -1,0 +1,105 @@
+<div class="page-background home-container">
+
+  <section class="welcome-card">
+    <div>
+      <h1>Bienvenido a VitalMovs</h1>
+      <p>
+        Sesión iniciada como <strong>{{ obtenerNombreRol() }}</strong>.
+      </p>
+    </div>
+
+    <mat-icon class="welcome-icon">favorite</mat-icon>
+  </section>
+
+
+  <!-- PACIENTE -->
+  <section class="profile-card" *ngIf="rol === 'ROLE_PACIENTE' && paciente">
+
+    <div class="card-header">
+      <mat-icon>person</mat-icon>
+      <div>
+        <h2>Mis datos</h2>
+        <p>Información personal registrada en el sistema.</p>
+      </div>
+    </div>
+
+    <div class="data-grid">
+      <div class="data-item">
+        <span>Nombre</span>
+        <strong>{{ paciente.nombre }} {{ paciente.apellido }}</strong>
+      </div>
+
+      <div class="data-item">
+        <span>Edad</span>
+        <strong>{{ paciente.edad }} años</strong>
+      </div>
+
+      <div class="data-item">
+        <span>Sexo</span>
+        <strong>{{ paciente.sexo }}</strong>
+      </div>
+
+      <div class="data-item full">
+        <span>Discapacidad asociada</span>
+        <strong>
+          {{ discapacidadesPaciente || 'Sin discapacidad registrada' }}
+        </strong>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- FISIOTERAPEUTA -->
+  <section class="profile-card" *ngIf="rol === 'ROLE_FISIOTERAPEUTA' && fisioterapeuta">
+
+    <div class="card-header">
+      <mat-icon>medical_services</mat-icon>
+      <div>
+        <h2>Mi perfil profesional</h2>
+        <p>Información profesional registrada en el sistema.</p>
+      </div>
+    </div>
+
+    <div class="data-grid">
+      <div class="data-item">
+        <span>Nombre</span>
+        <strong>{{ fisioterapeuta.nombre }} {{ fisioterapeuta.apellido }}</strong>
+      </div>
+
+      <div class="data-item">
+        <span>Especialidad</span>
+        <strong>{{ fisioterapeuta.especialidad }}</strong>
+      </div>
+
+      <div class="data-item full">
+        <span>Áreas que atiende</span>
+        <strong>
+          {{ discapacidadesFisioterapeuta || 'Sin áreas registradas' }}
+        </strong>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ADMIN -->
+  <section class="admin-grid" *ngIf="rol === 'ROLE_ADMIN'">
+
+    <div class="summary-card">
+      <mat-icon>accessible</mat-icon>
+      <h3>Pacientes registrados</h3>
+      <h2>{{ totalPacientes }}</h2>
+      <p>Total de pacientes creados en el sistema.</p>
+    </div>
+
+    <div class="summary-card">
+      <mat-icon>medical_services</mat-icon>
+      <h3>Fisioterapeutas registrados</h3>
+      <h2>{{ totalFisioterapeutas }}</h2>
+      <p>Total de fisioterapeutas creados en el sistema.</p>
+    </div>
+
+  </section>
+
+</div>

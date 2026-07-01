@@ -38,4 +38,9 @@ export class FisioterapeutaService {
     const params = new HttpParams().set('especialidad', especialidad);
     return this.http.get<Fisioterapeuta[]>(`${this.baseUrl}/fisioterapeuta/especialidad`, { params });
   }
+
+  findByUserId(userId: number) {
+      return this.http.get<Fisioterapeuta>(`${this.baseUrl}/fisioterapeuta/user/${userId}`
+    );
+  }
 }

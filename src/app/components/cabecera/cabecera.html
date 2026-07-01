@@ -13,36 +13,48 @@
   <span class="example-spacer"></span>
 
   <nav class="nav-links">
-    
-    <a routerLink="/paciente/list-pacientes">
-      <mat-icon>accessible</mat-icon>
-      <span>Pacientes</span>
-    </a>
-    
-    <a routerLink="/tipo-discapacidad/list-tipos">
-      <mat-icon>accessibility_new</mat-icon>
-      <span>Discapacidades</span>
-    </a>
 
     <a routerLink="/home">
       <mat-icon>home</mat-icon>
       <span>Inicio</span>
     </a>
+    
+    <a *ngIf="rol === 'ROLE_ADMIN'" routerLink="/paciente/list-pacientes" >
+      <mat-icon>accessible</mat-icon>
+      <span>Pacientes</span>
+    </a>
 
-    <a routerLink="/plan-rehabilitacion/list-planes">
+    <a *ngIf="rol === 'ROLE_ADMIN'" routerLink="/fisioterapeuta/list-fisioterapeutas">
+      <mat-icon>medical_services</mat-icon>
+      <span>Fisioterapeutas</span>
+    </a>
+    
+    <a *ngIf="rol === 'ROLE_ADMIN'" routerLink="/tipo-discapacidad/list-tipos">
+      <mat-icon >accessibility_new</mat-icon>
+      <span>Discapacidades</span>
+    </a>
+
+    <a *ngIf="rol === 'ROLE_ADMIN'" routerLink="/fisioterapeuta/list-fisioterapeutas">
+      <mat-icon>fitness_center</mat-icon>
+      <span>Ejercicios</span>
+    </a>
+
+    <a *ngIf="rol != 'ROLE_ADMIN'" routerLink="/plan-rehabilitacion/list-planes">
       <mat-icon>assignment</mat-icon>
       <span>Planes</span>
     </a>
 
-    <a routerLink="/foros/list-foros">
+    <a *ngIf="rol != 'ROLE_ADMIN'" routerLink="/asignaciones/list-asignaciones">
+      <mat-icon>person_add</mat-icon>
+      <span>Asignaciones</span>
+    </a>
+
+    <a *ngIf="rol === 'ROLE_PACIENTE'" routerLink="/foros/list-foros">
       <mat-icon>groups</mat-icon>
       <span>Foro</span>
     </a>
 
-    <a routerLink="/fisioterapeuta/list-fisioterapeutas">
-      <mat-icon>medical_services</mat-icon>
-      <span>Fisioterapeutas</span>
-    </a>
+
   </nav>
 
   &nbsp;

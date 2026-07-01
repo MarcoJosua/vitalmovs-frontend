@@ -21,12 +21,13 @@ import { EditFisioterapeutaComponent }    from './components/fisioterapeuta/edit
 import { BuscarFisioterapeutaComponent }  from './components/fisioterapeuta/buscar-fisioterapeuta/buscar-fisioterapeuta';
 import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad';
 import { AddFisioDiscapacidadComponent }  from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad';
+import { Home } from './components/home/home';
 
 
 const routes: Routes = [
   {path: "", component:Login},
   {path: "login", component:Login},
-  {path: "home", component:ListPlanes, canActivate:[consultarGuard]},
+  {path: "home", component:Home, canActivate:[consultarGuard]},
   {path: "plan-rehabilitacion/list-planes", component:ListPlanes, canActivate:[consultarGuard]},
   {path: 'plan-rehabilitacion/agregar/:asignacionId', component: AddPlanes, canActivate:[grabarGuard]},
   {path: 'plan-rehabilitacion/editar/:planId', component: AddPlanes, canActivate:[grabarGuard]},

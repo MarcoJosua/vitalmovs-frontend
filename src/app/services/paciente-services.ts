@@ -41,4 +41,11 @@ export class PacienteService {
   buscarPorTipoDiscapacidad(tipoId: number): Observable<Paciente[]> {
     return this.http.get<Paciente[]>(`${this.baseUrl}/paciente/buscarPorTipo/${tipoId}`);
   }
+
+  findByUserId(userId: number) {
+        return this.http.get<Paciente>(`${this.baseUrl}/paciente/user/${userId}`
+      );
+  }
+
+  
 }

@@ -23,11 +23,12 @@ import { ListPacienteComponent } from './components/paciente/list-paciente/list-
 import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
 import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
 import { ListFisioterapeutaComponent } from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta';
-import { AddFisioterapeutaComponent } from './components/fisioterapeuta/add-fisioterapeuta/add-fisioterapeuta'; 
-import { EditFisioterapeutaComponent } from './components/fisioterapeuta/edit-fisioterapeuta/edit-fisioterapeuta'; 
+import { AddFisioterapeutaComponent } from './components/fisioterapeuta/add-fisioterapeuta/add-fisioterapeuta';
+import { EditFisioterapeutaComponent } from './components/fisioterapeuta/edit-fisioterapeuta/edit-fisioterapeuta';
 import { BuscarFisioterapeutaComponent } from './components/fisioterapeuta/buscar-fisioterapeuta/buscar-fisioterapeuta';
-import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad'; 
+import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad';
 import { AddFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad';
+import { Home } from './components/home/home';
 
 @NgModule({
   declarations: [
@@ -52,9 +53,21 @@ import { AddFisioDiscapacidadComponent } from './components/fisioterapeuta-disca
     BuscarFisioterapeutaComponent,
     ListFisioDiscapacidadComponent,
     AddFisioDiscapacidadComponent,
+    Home,
   ],
-  imports: [BrowserModule, AppRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, HttpClientModule],
-  providers: [provideBrowserGlobalErrorListeners(), provideNativeDateAdapter(), provideHttpClient(withInterceptors([autorizacionInterceptor]))],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideNativeDateAdapter(),
+    provideHttpClient(withInterceptors([autorizacionInterceptor])),
+  ],
   bootstrap: [App],
 })
 export class AppModule {}

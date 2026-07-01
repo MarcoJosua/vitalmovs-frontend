@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user-service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-cabecera',
@@ -8,13 +9,33 @@ import { Router } from '@angular/router';
   templateUrl: './cabecera.html',
   styleUrl: './cabecera.css',
 })
+export class Cabecera implements OnInit {
 
-export class Cabecera {
-  constructor (private userService:UserService, private router:Router){}
+  rol: string = '';
 
-  Logout(){
-    this.userService.logout();
-    this.router.navigate(["/login"]);
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarRol();
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.cargarRol();
+      });
   }
-  
+
+  cargarRol(): void {
+    this.rol = this.userService.getAuthoritiesLogeado();
+    console.log('ROL EN CABECERA:', this.rol);
+  }
+
+  Logout(): void {
+    this.userService.logout();
+    this.rol = '';
+    this.router.navigate(['/login']);
+  }
 }
