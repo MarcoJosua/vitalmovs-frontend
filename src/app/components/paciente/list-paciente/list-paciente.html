@@ -1,9 +1,12 @@
 <div class="contenedor">
   <div class="encabezado">
     <h2>Pacientes</h2>
-    <button mat-raised-button color="primary" (click)="nuevo()">
-      <mat-icon>add</mat-icon> Nuevo paciente
-    </button>
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Buscar por nombre</mat-label>
+      <input matInput (keyup)="buscar($event)" placeholder="Ej: Juan">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
   </div>
 
   <table mat-table [dataSource]="pacientes" class="mat-elevation-z2">
@@ -35,14 +38,9 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let p">
-        <button mat-icon-button color="accent" (click)="verDiscapacidades(p.id)" title="Discapacidades">
+        
+        <button mat-icon-button color="accent" (click)="verDiscapacidades(p.id)" title="Ver discapacidades">
           <mat-icon>accessible</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" (click)="editar(p.id)">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button color="warn" (click)="eliminar(p.id)">
-          <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>
