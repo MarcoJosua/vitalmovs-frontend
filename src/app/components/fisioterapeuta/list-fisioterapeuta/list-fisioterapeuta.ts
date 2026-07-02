@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Fisioterapeuta } from '../../models/fisioterapeutaDTO';
-import { FisioterapeutaService } from '../../services/fisioterapeuta-service';
+import { Fisioterapeuta } from '../../models/FisioterapeutaDTO';
+import { FisioterapeutaService } from '../../services/Fisioterapeuta-service';
 
 @Component({
   selector: 'app-list-fisioterapeuta',
