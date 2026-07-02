@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PacienteService } from '../../../services/paciente-services';
-import { Paciente } from '../../../models/pacienteDTO';
-
+import { Paciente } from '../../../models/paciente';
+import { PacienteService } from '../../../services/paciente.service';
 
 @Component({
   selector: 'app-list-paciente',
   templateUrl: './list-paciente.html',
-  standalone: false,
   styleUrls: ['./list-paciente.css']
 })
 export class ListPacienteComponent implements OnInit {
@@ -30,24 +28,19 @@ export class ListPacienteComponent implements OnInit {
     });
   }
 
-  editar(id: number): void {
-    this.router.navigate(['/pacientes/editar', id]);
-  }
-
-  verDiscapacidades(id: number): void {
-    this.router.navigate(['/pacientes', id, 'discapacidades']);
-  }
-
-  eliminar(id: number): void {
-    if (confirm('¿Seguro que deseas eliminar este paciente?')) {
-      this.pacienteService.delete(id).subscribe({
-        next: () => this.cargarPacientes(),
-        error: (err) => console.error('Error al eliminar', err)
+  buscar(event: Event): void {
+    const texto = (event.target as HTMLInputElement).value.trim();
+    if (texto === '') {
+      this.cargarPacientes();
+    } else {
+      this.pacienteService.buscarPorNombre(texto).subscribe({
+        next: (data) => this.pacientes = data,
+        error: (err) => console.error('Error al buscar', err)
       });
     }
   }
 
-  nuevo(): void {
-    this.router.navigate(['/pacientes/nuevo']);
+  verDiscapacidades(id: number): void {
+    this.router.navigate(['/pacientes', id, 'discapacidades']);
   }
 }
