@@ -29,6 +29,10 @@ import { BuscarFisioterapeutaComponent } from './components/fisioterapeuta/busca
 import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad';
 import { AddFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad';
 import { Home } from './components/home/home';
+import { ListForoComponent } from './components/foro/list-foro/list-foro';
+import { AddForoComponent } from './components/foro/add-foro/add-foro';
+import { ListPublicacionComponent } from './components/publicacion/list-publicacion/list-publicacion';
+import { AddPublicacionComponent } from './components/publicacion/add-publicacion/add-publicacion';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,10 @@ import { Home } from './components/home/home';
     ListFisioDiscapacidadComponent,
     AddFisioDiscapacidadComponent,
     Home,
+    ListForoComponent,
+    AddForoComponent,
+    ListPublicacionComponent,
+    AddPublicacionComponent,
   ],
   imports: [
     BrowserModule,

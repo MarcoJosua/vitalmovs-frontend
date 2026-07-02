@@ -22,6 +22,10 @@ import { BuscarFisioterapeutaComponent }  from './components/fisioterapeuta/busc
 import { ListFisioDiscapacidadComponent } from './components/fisioterapeuta-discapacidad/list-fisio-discapacidad/list-fisio-discapacidad';
 import { AddFisioDiscapacidadComponent }  from './components/fisioterapeuta-discapacidad/add-fisio-discapacidad/add-fisio-discapacidad';
 import { Home } from './components/home/home';
+import { ListForoComponent } from './components/foro/list-foro/list-foro';
+import { AddForoComponent } from './components/foro/add-foro/add-foro';
+import { ListPublicacionComponent } from './components/publicacion/list-publicacion/list-publicacion';
+import { AddPublicacionComponent } from './components/publicacion/add-publicacion/add-publicacion';
 
 
 const routes: Routes = [
@@ -52,6 +56,12 @@ const routes: Routes = [
   {path: 'fisioterapeuta/buscar', component: BuscarFisioterapeutaComponent, canActivate: [consultarGuard]},
   {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad', component: ListFisioDiscapacidadComponent, canActivate: [consultarGuard]},
   {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad/agregar', component: AddFisioDiscapacidadComponent, canActivate: [grabarGuard]},
+  {path: 'foros/list-foros', component: ListForoComponent, canActivate: [consultarGuard]},
+  {path: 'foros/agregar', component: AddForoComponent, canActivate: [grabarGuard]},
+  {path: 'foros/editar/:foroId', component: AddForoComponent, canActivate: [grabarGuard]},
+  {path: 'foros/:foroId/publicaciones', component: ListPublicacionComponent, canActivate: [consultarGuard]},
+  {path: 'foros/:foroId/publicaciones/agregar', component: AddPublicacionComponent, canActivate: [grabarGuard]},
+  {path: 'foros/:foroId/publicaciones/editar/:publicacionId', component: AddPublicacionComponent, canActivate: [grabarGuard]},
 
 
 ];

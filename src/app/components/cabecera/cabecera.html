@@ -49,7 +49,7 @@
       <span>Asignaciones</span>
     </a>
 
-    <a *ngIf="rol === 'ROLE_PACIENTE'" routerLink="/foros/list-foros">
+    <a *ngIf="rol === 'ROLE_PACIENTE' || rol === 'ROLE_ADMIN'" routerLink="/foros/list-foros">
       <mat-icon>groups</mat-icon>
       <span>Foro</span>
     </a>

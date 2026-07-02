@@ -1,0 +1,50 @@
+<div class="page-wrapper">
+  <div class="card-header-row">
+    <div class="header-left">
+      <button class="btn btn-outline" (click)="volver()">Volver</button>
+      <h2 class="page-title">Publicaciones</h2>
+    </div>
+    <div class="header-actions">
+      <a [routerLink]="['/foros', foroId, 'publicaciones', 'agregar']" class="btn btn-primary">+ Nueva Publicacion</a>
+    </div>
+  </div>
+
+  <div class="publicaciones-list">
+    <div class="publicacion-card" *ngFor="let p of publicaciones">
+      <div class="pub-header">
+        <h3>{{ p.titulo }}</h3>
+        <span class="pub-fecha">{{ p.fechaPublicacion }}</span>
+      </div>
+      <p class="pub-contenido">{{ p.contenido }}</p>
+      <div class="pub-actions">
+        <button class="btn-action btn-info" (click)="toggleComentarios(p.id!)">
+          {{ mostrarComentarios[p.id!] ? 'Ocultar' : 'Ver' }} comentarios
+          ({{ comentarios[p.id!]?.length || 0 }})
+        </button>
+        <button *ngIf="rol === 'ROLE_ADMIN'" class="btn-action btn-warning" (click)="editarPublicacion(p.id!)">Editar</button>
+        <button *ngIf="rol === 'ROLE_ADMIN'" class="btn-action btn-danger" (click)="eliminarPublicacion(p.id!)">Eliminar</button>
+      </div>
+
+      <div class="comentarios-section" *ngIf="mostrarComentarios[p.id!]">
+        <div class="comentario" *ngFor="let c of comentarios[p.id!]">
+          <div class="comentario-contenido">
+            <p>{{ c.contenido }}</p>
+            <span class="comentario-fecha">{{ c.fechaComentario }}</span>
+          </div>
+          <button *ngIf="rol === 'ROLE_ADMIN'" class="btn-small btn-danger" (click)="eliminarComentario(c.id!, p.id!)">X</button>
+        </div>
+        <div class="comentario-vacio" *ngIf="!comentarios[p.id!] || comentarios[p.id!].length === 0">
+          <p>Sin comentarios</p>
+        </div>
+        <div class="comentario-form">
+          <input type="text" class="form-input" [(ngModel)]="nuevoComentario[p.id!]" placeholder="Escribe un comentario..." (keyup.enter)="agregarComentario(p.id!)">
+          <button class="btn btn-primary btn-small" (click)="agregarComentario(p.id!)">Comentar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="publicacion-vacia" *ngIf="publicaciones.length === 0">
+      <p>No hay publicaciones en este foro.</p>
+    </div>
+  </div>
+</div>

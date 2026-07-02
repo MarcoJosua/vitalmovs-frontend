@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+  <div class="card-header-row">
+    <h2 class="page-title">Foros</h2>
+    <div class="header-actions" *ngIf="rol === 'ROLE_ADMIN'">
+      <a routerLink="/foros/agregar" class="btn btn-primary">+ Nuevo Foro</a>
+    </div>
+  </div>
+
+  <div class="table-wrapper" *ngIf="rol === 'ROLE_PACIENTE'">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Descripcion</th>
+          <th>Publicaciones</th>
+          <th>Comentarios</th>
+          <th>Ultima actividad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of foros">
+          <td>{{ f.titulo }}</td>
+          <td>{{ f.descripcion }}</td>
+          <td><span class="badge">{{ f.cantidadPublicaciones }}</span></td>
+          <td><span class="badge">{{ f.cantidadComentarios }}</span></td>
+          <td>{{ f.ultimaActividad }}</td>
+          <td class="actions-cell">
+            <button class="btn-action btn-info" (click)="verPublicaciones(f.id)">Ver</button>
+          </td>
+        </tr>
+        <tr *ngIf="foros.length === 0">
+          <td colspan="6" class="empty-row">No hay foros disponibles para tu tipo de discapacidad.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-wrapper" *ngIf="rol !== 'ROLE_PACIENTE'">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Titulo</th>
+          <th>Descripcion</th>
+          <th>Tipo discapacidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of foros">
+          <td>{{ f.titulo }}</td>
+          <td>{{ f.descripcion }}</td>
+          <td><span class="badge">{{ f.nombreTipo }}</span></td>
+          <td class="actions-cell">
+            <button class="btn-action btn-info" (click)="verPublicaciones(f.id)">Ver</button>
+            <button class="btn-action btn-warning" (click)="editar(f.id)">Editar</button>
+            <button class="btn-action btn-danger" (click)="eliminar(f.id)">Eliminar</button>
+          </td>
+        </tr>
+        <tr *ngIf="foros.length === 0">
+          <td colspan="4" class="empty-row">No hay foros registrados.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
