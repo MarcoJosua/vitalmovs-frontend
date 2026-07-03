@@ -22,7 +22,6 @@ import { AddPacienteComponent } from './components/paciente/add-paciente/add-pac
 import { ListPacienteComponent } from './components/paciente/list-paciente/list-paciente';
 import { AddPacienteDiscapacidadComponent } from './components/paciente-discapacidad/add-paciente-discapacidad/add-paciente-discapacidad';
 import { ListPacienteDiscapacidadComponent } from './components/paciente-discapacidad/list-paciente-discapacidad/list-paciente-discapacidad';
-import { ListFisioterapeutaComponent } from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta';
 import { AddFisioterapeutaComponent } from './components/fisioterapeuta/add-fisioterapeuta/add-fisioterapeuta';
 import { EditFisioterapeutaComponent } from './components/fisioterapeuta/edit-fisioterapeuta/edit-fisioterapeuta';
 import { BuscarFisioterapeutaComponent } from './components/fisioterapeuta/buscar-fisioterapeuta/buscar-fisioterapeuta';
@@ -33,6 +32,7 @@ import { ListForoComponent } from './components/foro/list-foro/list-foro';
 import { AddForoComponent } from './components/foro/add-foro/add-foro';
 import { ListPublicacionComponent } from './components/publicacion/list-publicacion/list-publicacion';
 import { AddPublicacionComponent } from './components/publicacion/add-publicacion/add-publicacion';
+import { ListFisioterapeutaComponent } from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta';
 
 @NgModule({
   declarations: [

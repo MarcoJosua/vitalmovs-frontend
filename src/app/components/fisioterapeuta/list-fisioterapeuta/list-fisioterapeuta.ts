@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Fisioterapeuta } from '../../models/FisioterapeutaDTO';
-import { FisioterapeutaService } from '../../services/Fisioterapeuta-service';
+import { FisioterapeutaService } from '../../../services/Fisioterapeuta-service';
+import { Fisioterapeuta } from '../../../models/FisioterapeutaDTO';
 
 @Component({
   selector: 'app-list-fisioterapeuta',
   templateUrl: './list-fisioterapeuta.html',
+  standalone: false,
   styleUrls: ['./list-fisioterapeuta.css']
 })
 export class ListFisioterapeutaComponent implements OnInit {
