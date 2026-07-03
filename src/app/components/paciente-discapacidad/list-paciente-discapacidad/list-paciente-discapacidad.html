@@ -1,27 +1,53 @@
-<div class="contenedor">
-  <div class="encabezado">
-    <h2>Discapacidades asignadas</h2>
-    <button mat-raised-button color="primary" (click)="agregar()">
-      <mat-icon>add</mat-icon> Agregar
-    </button>
+<div class="page-wrapper">
+
+  <div class="card-header-row">
+    <h2 class="page-title">
+      Discapacidades — Paciente #{{ pacienteId }}
+    </h2>
+
+    <div class="header-actions">
+      <button class="btn btn-outline" type="button" (click)="volver()">
+        ← Volver
+      </button>
+
+      <button class="btn btn-primary" type="button" (click)="agregar()">
+        + Agregar
+      </button>
+    </div>
   </div>
 
-  <table mat-table [dataSource]="filas" class="mat-elevation-z2">
-    <ng-container matColumnDef="nombreTipo">
-      <th mat-header-cell *matHeaderCellDef> Tipo de discapacidad </th>
-      <td mat-cell *matCellDef="let fila"> {{ fila.nombreTipo }} </td>
-    </ng-container>
+  <p class="empty-row" *ngIf="cargando">
+    Cargando discapacidades...
+  </p>
 
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let fila">
-        <button mat-icon-button color="warn" (click)="quitar(fila.id)">
-          <mat-icon>delete</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+  <table class="data-table" *ngIf="!cargando">
+    <thead>
+      <tr>
+        <th>ID Registro</th>
+        <th>Tipo de discapacidad</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
 
-    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-    <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+    <tbody>
+      <tr *ngFor="let d of discapacidades">
+        <td>{{ d.id }}</td>
+        <td>{{ d.nombreTipo }}</td>
+        <td>{{ d.descripcionTipo }}</td>
+        <td>
+          <button class="btn btn-danger" type="button" (click)="eliminar(d.id!)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="discapacidades.length === 0">
+        <td colspan="4" class="empty-row">
+          Sin discapacidades asignadas.
+        </td>
+      </tr>
+    </tbody>
   </table>
+
 </div>

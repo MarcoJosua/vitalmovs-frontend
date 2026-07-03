@@ -1,22 +1,58 @@
 <div class="page-wrapper">
   <div class="form-card">
-    <h2 class="form-title">Agregar Discapacidad — Fisioterapeuta #{{ fisioterapeutaId }}</h2>
 
-    <div class="form-group">
-      <label class="form-label">Tipo de Discapacidad</label>
-      <select class="form-select" [(ngModel)]="tipoSeleccionadoId">
-        <option [value]="0" disabled>Selecciona un tipo...</option>
-        <option *ngFor="let t of tiposDiscapacidad" [value]="t.id">
-          {{ t.nombre }}
-        </option>
-      </select>
+    <h2 class="form-title">Tipos de discapacidad que atiende</h2>
+
+    <p class="form-subtitle" *ngIf="modoRegistro">
+      Selecciona uno o más tipos de discapacidad que puedes atender como fisioterapeuta.
+    </p>
+
+    <p class="form-subtitle" *ngIf="!modoRegistro">
+      Actualiza los tipos de discapacidad que atiendes.
+    </p>
+
+    <p class="empty-row" *ngIf="cargando">
+      Cargando tipos de discapacidad...
+    </p>
+
+    <div class="lista-checkbox" *ngIf="!cargando && opciones.length > 0">
+      <mat-checkbox
+        *ngFor="let opcion of opciones"
+        [(ngModel)]="opcion.marcado">
+        {{ opcion.tipo.nombre }} — {{ opcion.tipo.descripcion }}
+      </mat-checkbox>
     </div>
+
+    <p class="empty-row" *ngIf="!cargando && opciones.length === 0">
+      No hay tipos de discapacidad registrados.
+    </p>
 
     <div class="form-actions">
-      <button class="btn btn-primary" (click)="guardar()" [disabled]="!tipoSeleccionadoId">
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        *ngIf="modoRegistro"
+        (click)="ahoraNo()">
+        Ahora no
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        *ngIf="!modoRegistro"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="guardar()">
         Guardar
       </button>
-      <button class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+
     </div>
+
   </div>
 </div>

@@ -1,38 +1,75 @@
-<div class="contenedor-form">
-  <h2>{{ id ? 'Editar' : 'Nuevo' }} paciente</h2>
+<div class="page-wrapper">
+  <div class="form-card">
 
-  <form [formGroup]="form" (ngSubmit)="guardar()">
-    <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre">
-    </mat-form-field>
+    <h2 class="form-title">
+      {{ id ? 'Editar paciente' : 'Nuevo paciente' }}
+    </h2>
 
-    <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>Apellido</mat-label>
-      <input matInput formControlName="apellido">
-    </mat-form-field>
+    <p class="form-subtitle" *ngIf="modoRegistro">
+      Completa tus datos personales para finalizar el registro.
+    </p>
 
-    <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>Edad</mat-label>
-      <input matInput type="number" formControlName="edad">
-    </mat-form-field>
+    <form [formGroup]="form" (ngSubmit)="guardar()">
 
-    <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>Sexo</mat-label>
-      <mat-select formControlName="sexo">
-        <mat-option value="Masculino">Masculino</mat-option>
-        <mat-option value="Femenino">Femenino</mat-option>
-      </mat-select>
-    </mat-form-field>
+      <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-input"
+          formControlName="nombre"
+          placeholder="Ingresa tu nombre">
+      </div>
 
-    <mat-form-field appearance="outline" class="campo-completo">
-      <mat-label>ID de usuario</mat-label>
-      <input matInput type="number" formControlName="userId">
-    </mat-form-field>
+      <div class="form-group">
+        <label class="form-label">Apellido</label>
+        <input
+          type="text"
+          class="form-input"
+          formControlName="apellido"
+          placeholder="Ingresa tu apellido">
+      </div>
 
-    <div class="acciones-form">
-      <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
-    </div>
-  </form>
+      <div class="form-group">
+        <label class="form-label">Edad</label>
+        <input
+          type="number"
+          class="form-input"
+          formControlName="edad"
+          placeholder="Ingresa tu edad">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Sexo</label>
+        <select class="form-input" formControlName="sexo">
+          <option value="">Selecciona una opción</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </div>
+
+      <div class="form-group" *ngIf="!modoRegistro">
+        <label class="form-label">ID de usuario</label>
+        <input
+          type="number"
+          class="form-input"
+          formControlName="userId"
+          placeholder="Ingresa el ID del usuario">
+      </div>
+
+      <p class="info-text" *ngIf="modoRegistro">
+        El paciente quedará vinculado automáticamente al usuario creado.
+      </p>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">
+          Guardar
+        </button>
+
+        <button class="btn btn-secondary" type="button" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>

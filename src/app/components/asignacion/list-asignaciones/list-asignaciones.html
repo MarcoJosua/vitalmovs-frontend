@@ -1,0 +1,132 @@
+<div class="page-wrapper">
+
+  <div class="header-row">
+    <h2 class="page-title">Asignaciones</h2>
+  </div>
+
+  <p class="page-subtitle" *ngIf="rol === 'ROLE_PACIENTE'">
+    Selecciona un fisioterapeuta compatible con tus tipos de discapacidad y envía una solicitud.
+  </p>
+
+  <p class="page-subtitle" *ngIf="rol === 'ROLE_FISIOTERAPEUTA'">
+    Revisa las solicitudes recibidas. Las solicitudes pendientes pueden ser aceptadas.
+  </p>
+
+  <p class="empty-row" *ngIf="cargando">
+    Cargando información...
+  </p>
+
+  <!-- VISTA PACIENTE -->
+  <section *ngIf="rol === 'ROLE_PACIENTE' && !cargando">
+
+    <div class="message-box">
+      <mat-form-field appearance="outline" class="campo-completo">
+        <mat-label>Mensaje de solicitud</mat-label>
+        <textarea
+          matInput
+          rows="3"
+          [(ngModel)]="mensajeSolicitud">
+        </textarea>
+      </mat-form-field>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Especialidad</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let f of fisioterapeutasCompatibles">
+          <td>{{ f.nombre }}</td>
+          <td>{{ f.apellido }}</td>
+          <td>{{ f.especialidad }}</td>
+          <td>
+            <span class="badge" *ngIf="obtenerEstadoSolicitud(f.id!)">
+              {{ obtenerEstadoSolicitud(f.id!) }}
+            </span>
+
+            <span *ngIf="!obtenerEstadoSolicitud(f.id!)">
+              Sin solicitud
+            </span>
+          </td>
+          <td>
+            <button
+              class="btn btn-primary"
+              [disabled]="yaSolicitado(f.id!)"
+              (click)="solicitarAsignacion(f)">
+              Solicitar
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="fisioterapeutasCompatibles.length === 0">
+          <td colspan="5" class="empty-row">
+            No se encontraron fisioterapeutas compatibles. Verifica que tengas tipos de discapacidad registrados.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <!-- VISTA FISIOTERAPEUTA -->
+  <section *ngIf="rol === 'ROLE_FISIOTERAPEUTA' && !cargando">
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Paciente</th>
+          <th>Mensaje</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let a of asignacionesFisioterapeuta">
+          <td>
+            {{ (a.nombrePaciente || '') + ' ' + (a.apellidoPaciente || '') }}
+          </td>
+          <td>{{ a.mensaje }}</td>
+          <td>{{ a.fecha }}</td>
+          <td>
+            <span class="badge">{{ a.estado }}</span>
+          </td>
+          <td>
+            <button
+              class="btn btn-primary"
+              *ngIf="a.estado === 'PENDIENTE'"
+              (click)="aceptarAsignacion(a)">
+              Aceptar
+            </button>
+
+            <span *ngIf="a.estado !== 'PENDIENTE'">
+              Sin acción
+            </span>
+          </td>
+        </tr>
+
+        <tr *ngIf="asignacionesFisioterapeuta.length === 0">
+          <td colspan="5" class="empty-row">
+            No tienes solicitudes de asignación registradas.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section *ngIf="rol !== 'ROLE_PACIENTE' && rol !== 'ROLE_FISIOTERAPEUTA'">
+    <p class="empty-row">
+      Esta pantalla está disponible para pacientes y fisioterapeutas.
+    </p>
+  </section>
+
+</div>

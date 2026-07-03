@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { forkJoin, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
+import { TipoDiscapacidad } from '../../../models/tipodiscapacidadDTO';
+import { TipoDiscapacidadService } from '../../../services/tipo-discapacidad-services';
 import { FisioterapeutaDiscapacidadService } from '../../../services/Fisioterapeuta-Discapacidad-service';
-import { FisioterapeutaDiscapacidad } from '../../../models/FisioterapeutaDiscapacidadDTO';
 
-
-interface TipoDiscapacidad {
-  id: number;
-  nombre: string;
-  descripcion: string;
+interface OpcionDiscapacidad {
+  tipo: TipoDiscapacidad;
+  marcado: boolean;
+  registroId: number | null;
 }
 
 @Component({
@@ -20,37 +21,133 @@ interface TipoDiscapacidad {
 export class AddFisioDiscapacidadComponent implements OnInit {
 
   fisioterapeutaId!: number;
-  tiposDiscapacidad: TipoDiscapacidad[] = [];
-  tipoSeleccionadoId: number = 0;
+  opciones: OpcionDiscapacidad[] = [];
+  modoRegistro: boolean = false;
+  cargando: boolean = false;
 
   constructor(
-    private fdService: FisioterapeutaDiscapacidadService,
+    private tipoDiscapacidadService: TipoDiscapacidadService,
+    private fisioterapeutaDiscapacidadService: FisioterapeutaDiscapacidadService,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.fisioterapeutaId = Number(this.route.snapshot.paramMap.get('id'));
-    this.http.get<TipoDiscapacidad[]>('http://localhost:8080/vitalmovs/tipoDiscapacidad/tipos')
-      .subscribe({
-        next: (data) => this.tiposDiscapacidad = data,
-        error: (err) => console.error('Error al cargar tipos de discapacidad', err)
-      });
+    const fisioterapeutaIdParam =
+      this.route.snapshot.paramMap.get('fisioterapeutaId') ||
+      this.route.snapshot.paramMap.get('id');
+
+    this.fisioterapeutaId = Number(fisioterapeutaIdParam);
+    this.modoRegistro = this.router.url.includes('/registro');
+
+    console.log('Fisioterapeuta ID recibido en agregar discapacidad:', this.fisioterapeutaId);
+
+    if (!this.fisioterapeutaId) {
+      console.error('No se pudo obtener el fisioterapeutaId desde la ruta');
+      this.cargando = false;
+      this.cdr.detectChanges();
+      return;
+    }
+
+    this.cargarTiposDiscapacidad();
   }
-  
+
+  cargarTiposDiscapacidad(): void {
+    this.cargando = true;
+    this.cdr.detectChanges();
+
+    forkJoin({
+      tipos: this.tipoDiscapacidadService.listAll().pipe(
+        catchError(err => {
+          console.error('Error al cargar tipos de discapacidad', err);
+          return of([]);
+        })
+      ),
+      asignados: this.fisioterapeutaDiscapacidadService.findByFisioterapeutaId(this.fisioterapeutaId).pipe(
+        catchError(err => {
+          console.error('Error al cargar discapacidades asignadas del fisioterapeuta', err);
+          return of([]);
+        })
+      )
+    })
+    .pipe(
+      finalize(() => {
+        this.cargando = false;
+        this.cdr.detectChanges();
+      })
+    )
+    .subscribe({
+      next: ({ tipos, asignados }) => {
+        console.log('Tipos recibidos:', tipos);
+        console.log('Asignados recibidos:', asignados);
+
+        this.opciones = tipos.map((tipo: TipoDiscapacidad) => {
+          const encontrado = asignados.find((a: any) => a.tipoDiscapacidadId === tipo.id);
+
+          return {
+            tipo: tipo,
+            marcado: !!encontrado,
+            registroId: encontrado && encontrado.id !== undefined ? encontrado.id : null
+          };
+        });
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error general al cargar opciones', err);
+        this.opciones = [];
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
   guardar(): void {
-  if (!this.tipoSeleccionadoId) return;
-  const dto: FisioterapeutaDiscapacidad = {
-    fisioterapeutaId: this.fisioterapeutaId,
-    tipoDiscapacidadId: this.tipoSeleccionadoId
-  };
-  this.fdService.add(dto).subscribe({
-    next: () => this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad']),
-    error: (err) => console.error('Error al guardar', err)
-  });
-}
-cancelar(): void {
-  this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad']);
-}
+    const operaciones: any[] = [];
+
+    for (const opcion of this.opciones) {
+      const yaExiste = opcion.registroId !== null;
+
+      if (opcion.marcado && !yaExiste) {
+        operaciones.push(this.fisioterapeutaDiscapacidadService.add({
+          fisioterapeutaId: this.fisioterapeutaId,
+          tipoDiscapacidadId: opcion.tipo.id!
+        }));
+      }
+
+      if (!opcion.marcado && yaExiste) {
+        operaciones.push(this.fisioterapeutaDiscapacidadService.delete(opcion.registroId!));
+      }
+    }
+
+    if (operaciones.length === 0) {
+      this.finalizar();
+      return;
+    }
+
+    forkJoin(operaciones).subscribe({
+      next: () => this.finalizar(),
+      error: (err) => console.error('Error al guardar discapacidades del fisioterapeuta', err)
+    });
+  }
+
+  finalizar(): void {
+    if (this.modoRegistro) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad']);
+    }
+  }
+
+  ahoraNo(): void {
+    this.router.navigate(['/login']);
+  }
+
+  cancelar(): void {
+    if (this.modoRegistro) {
+      this.router.navigate(['/login']);
+    } else {
+      this.router.navigate(['/fisioterapeuta', this.fisioterapeutaId, 'discapacidad']);
+    }
+  }
 }

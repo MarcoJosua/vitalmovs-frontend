@@ -11,6 +11,7 @@ import { Fisioterapeuta } from '../../models/FisioterapeutaDTO';
 import { PacienteService } from '../../services/paciente-services';
 import { FisioterapeutaService } from '../../services/Fisioterapeuta-service';
 import { PacienteDiscapacidadService } from '../../services/paciente-discapacidad-services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,8 @@ export class Home implements OnInit {
     private fisioterapeutaService: FisioterapeutaService,
     private pacienteDiscapacidadService: PacienteDiscapacidadService,
     private fisioterapeutaDiscapacidadService: FisioterapeutaDiscapacidadService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +146,18 @@ export class Home implements OnInit {
         console.log('Error al cargar fisioterapeutas:', err);
       }
     });
+  }
+  
+  registrarDiscapacidadPaciente(): void {
+    if (this.paciente && this.paciente.id) {
+      this.router.navigate(['/paciente', this.paciente.id, 'discapacidad', 'agregar', 'perfil']);
+    }
+  }
+
+  registrarDiscapacidadFisioterapeuta(): void {
+    if (this.fisioterapeuta && this.fisioterapeuta.id) {
+     this.router.navigate(['/fisioterapeuta', this.fisioterapeuta.id, 'discapacidad', 'agregar', 'perfil']);
+    }
   }
 
   obtenerNombreRol(): string {

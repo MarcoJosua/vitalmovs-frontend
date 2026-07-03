@@ -1,16 +1,58 @@
-<div class="contenedor-form">
-  <h2>Discapacidades del paciente</h2>
+<div class="page-wrapper">
+  <div class="form-card">
 
-  <div class="lista-checkbox">
-    <mat-checkbox
-      *ngFor="let opcion of opciones"
-      [(ngModel)]="opcion.marcado">
-      {{ opcion.tipo.nombre }} — {{ opcion.tipo.descripcion }}
-    </mat-checkbox>
-  </div>
+    <h2 class="form-title">Tipos de discapacidad del paciente</h2>
 
-  <div class="acciones-form">
-    <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
-    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+    <p class="form-subtitle" *ngIf="modoRegistro">
+      Selecciona uno o más tipos de discapacidad para completar tu registro.
+    </p>
+
+    <p class="form-subtitle" *ngIf="!modoRegistro">
+      Actualiza los tipos de discapacidad asociados a tu perfil.
+    </p>
+
+    <p class="empty-row" *ngIf="cargando">
+      Cargando tipos de discapacidad...
+    </p>
+
+    <div class="lista-checkbox" *ngIf="!cargando && opciones.length > 0">
+      <mat-checkbox
+        *ngFor="let opcion of opciones"
+        [(ngModel)]="opcion.marcado">
+        {{ opcion.tipo.nombre }} — {{ opcion.tipo.descripcion }}
+      </mat-checkbox>
+    </div>
+
+    <p class="empty-row" *ngIf="!cargando && opciones.length === 0">
+      No hay tipos de discapacidad registrados.
+    </p>
+
+    <div class="form-actions">
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        *ngIf="modoRegistro"
+        (click)="ahoraNo()">
+        Ahora no
+      </button>
+
+      <button
+        class="btn btn-secondary"
+        type="button"
+        *ngIf="!modoRegistro"
+        (click)="cancelar()">
+        Cancelar
+      </button>
+
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="guardar()">
+        Guardar
+      </button>
+
+    </div>
+
   </div>
 </div>

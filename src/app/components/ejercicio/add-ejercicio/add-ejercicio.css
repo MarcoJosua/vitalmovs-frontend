@@ -10,7 +10,7 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.09);
   padding: 2rem;
   width: 100%;
-  max-width: 480px;
+  max-width: 520px;
 }
 
 .form-title {
@@ -46,20 +46,13 @@
   font-size: 0.95rem;
   color: #1e293b;
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 .form-input:focus {
   outline: none;
   border-color: #3b82f6;
   box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-}
-
-.info-text {
-  font-size: 0.85rem;
-  color: #64748b;
-  background: #f8fafc;
-  border-radius: 8px;
-  padding: 0.8rem;
 }
 
 .form-actions {
@@ -93,4 +86,11 @@
 
 .btn-secondary:hover {
   background-color: #e2e8f0;
+}
+
+.empty-row {
+  text-align: center;
+  color: #94a3b8;
+  padding: 1.2rem;
+  font-style: italic;
 }

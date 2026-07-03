@@ -1,33 +1,53 @@
 <div class="page-wrapper">
+
   <div class="card-header-row">
-    <h2 class="page-title">Discapacidades — Fisioterapeuta #{{ fisioterapeutaId }}</h2>
+    <h2 class="page-title">
+      Discapacidades — Fisioterapeuta #{{ fisioterapeutaId }}
+    </h2>
+
     <div class="header-actions">
-      <button class="btn btn-outline" (click)="volver()">← Volver</button>
-      <button class="btn btn-primary" (click)="agregar()">+ Agregar</button>
+      <button class="btn btn-outline" type="button" (click)="volver()">
+        ← Volver
+      </button>
+
+      <button class="btn btn-primary" type="button" (click)="agregar()">
+        + Agregar
+      </button>
     </div>
   </div>
 
-  <div class="table-wrapper">
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>ID Registro</th>
-          <th>ID Tipo Discapacidad</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let d of discapacidades">
-          <td>{{ d.id }}</td>
-          <td>{{ d.tipoDiscapacidadId }}</td>
-          <td>
-            <button class="btn-action btn-danger" (click)="eliminar(d.id!)">Eliminar</button>
-          </td>
-        </tr>
-        <tr *ngIf="discapacidades.length === 0">
-          <td colspan="3" class="empty-row">Sin discapacidades asignadas.</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <p class="empty-row" *ngIf="cargando">
+    Cargando discapacidades...
+  </p>
+
+  <table class="data-table" *ngIf="!cargando">
+    <thead>
+      <tr>
+        <th>ID Registro</th>
+        <th>Tipo de discapacidad</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let d of discapacidades">
+        <td>{{ d.id }}</td>
+        <td>{{ d.nombreTipo }}</td>
+        <td>{{ d.descripcionTipo }}</td>
+        <td>
+          <button class="btn btn-danger" type="button" (click)="eliminar(d.id!)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="discapacidades.length === 0">
+        <td colspan="4" class="empty-row">
+          Sin discapacidades asignadas.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

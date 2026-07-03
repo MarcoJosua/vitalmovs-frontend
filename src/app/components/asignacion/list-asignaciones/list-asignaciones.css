@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem;
 }
 
 .page-title {
@@ -18,10 +18,12 @@
   margin: 0;
 }
 
-.search-row {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
+.page-subtitle {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.message-box {
   background: white;
   border-radius: 12px;
   padding: 1rem;
@@ -29,24 +31,8 @@
   box-shadow: 0 1px 8px rgba(0,0,0,0.08);
 }
 
-.search-icon {
-  color: #64748b;
-}
-
-.search-input {
-  flex: 1;
-  padding: 0.6rem 0.9rem;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  color: #1e293b;
-  box-sizing: border-box;
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+.campo-completo {
+  width: 100%;
 }
 
 .data-table {
@@ -84,6 +70,15 @@
   color: #334155;
 }
 
+.badge {
+  background-color: #eff6ff;
+  color: #2563eb;
+  padding: 0.25rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 .btn {
   padding: 0.45rem 1rem;
   border-radius: 8px;
@@ -93,18 +88,23 @@
   border: none;
 }
 
-.btn-info {
-  background-color: #e0f2fe;
-  color: #0369a1;
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
 }
 
-.btn-info:hover {
-  background-color: #bae6fd;
+.btn-primary:hover {
+  background-color: #2563eb;
+}
+
+.btn-primary:disabled {
+  background-color: #cbd5e1;
+  cursor: not-allowed;
 }
 
 .empty-row {
   text-align: center;
   color: #94a3b8;
-  padding: 1.5rem;
+  padding: 2rem;
   font-style: italic;
 }

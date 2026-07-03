@@ -1,0 +1,57 @@
+<div class="page-wrapper">
+  <div class="form-card">
+
+    <h2 class="form-title">Crear usuario</h2>
+
+    <p class="form-subtitle">
+      Registra tu cuenta y selecciona si eres paciente o fisioterapeuta.
+    </p>
+
+    <div class="form-group">
+      <label class="form-label">Usuario o correo</label>
+      <input
+        type="text"
+        class="form-input"
+        [(ngModel)]="username"
+        placeholder="Ej: usuario@gmail.com">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Contraseña</label>
+      <input
+        type="password"
+        class="form-input"
+        [(ngModel)]="password"
+        placeholder="Ingresa tu contraseña">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Confirmar contraseña</label>
+      <input
+        type="password"
+        class="form-input"
+        [(ngModel)]="confirmarPassword"
+        placeholder="Repite tu contraseña">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Tipo de usuario</label>
+      <select class="form-input" [(ngModel)]="tipoUsuario">
+        <option value="">Selecciona una opción</option>
+        <option value="ROLE_PACIENTE">Paciente</option>
+        <option value="ROLE_FISIOTERAPEUTA">Fisioterapeuta</option>
+      </select>
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-primary" type="button" (click)="registrarUsuario()">
+        Crear usuario
+      </button>
+
+      <button class="btn btn-secondary" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+
+  </div>
+</div>

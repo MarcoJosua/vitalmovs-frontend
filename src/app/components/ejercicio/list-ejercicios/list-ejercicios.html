@@ -1,0 +1,70 @@
+<div class="page-wrapper">
+
+  <div class="header-row">
+    <div>
+      <h2 class="page-title">Ejercicios</h2>
+      <p class="page-subtitle">
+        Administra los ejercicios que podrán usarse en los planes de rehabilitación.
+      </p>
+    </div>
+
+    <button class="btn btn-primary" type="button" (click)="nuevo()">
+      Nuevo ejercicio
+    </button>
+  </div>
+
+  <div class="search-box">
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="textoBusqueda"
+      placeholder="Buscar por nombre o descripción">
+
+    <button class="btn btn-primary" type="button" (click)="buscar()">
+      Buscar
+    </button>
+
+    <button class="btn btn-secondary" type="button" (click)="limpiarBusqueda()">
+      Limpiar
+    </button>
+  </div>
+
+  <p class="empty-row" *ngIf="cargando">
+    Cargando ejercicios...
+  </p>
+
+  <table class="data-table" *ngIf="!cargando">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let ejercicio of ejercicios">
+        <td>{{ ejercicio.id }}</td>
+        <td>{{ ejercicio.nombre }}</td>
+        <td>{{ ejercicio.descripcion }}</td>
+        <td>
+          <button class="btn btn-edit" type="button" (click)="editar(ejercicio)">
+            Editar
+          </button>
+
+          <button class="btn btn-danger" type="button" (click)="eliminar(ejercicio)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="ejercicios.length === 0">
+        <td colspan="4" class="empty-row">
+          No hay ejercicios registrados.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

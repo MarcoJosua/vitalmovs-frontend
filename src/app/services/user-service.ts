@@ -27,7 +27,9 @@ export class UserService {
         )
       );
   }
-
+  register(userDTO: UserDTO) {
+    return this.http.post<UserDTO>(this.ruta_servidor + "/" + this.recurso + "/register", userDTO);
+  }
   logout() {
     localStorage.clear();
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Foro } from '../../../models/ForoDTO';
 import { ForoVista } from '../../../models/ForoVistaDTO';
@@ -18,66 +18,94 @@ export class ListForoComponent implements OnInit {
 
   foros: any[] = [];
   rol: string = '';
+  cargando: boolean = false;
 
   constructor(
     private foroService: ForoService,
     private userService: UserService,
     private pacienteService: PacienteService,
     private tipoDiscapacidadService: TipoDiscapacidadService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.rol = this.userService.getAuthoritiesLogeado().trim();
-    if (this.rol === 'ROLE_PACIENTE') {
+    this.cargando = true;
+    this.cdr.detectChanges();
+
+    if (this.rol.includes('ROLE_PACIENTE')) {
       this.cargarForosPaciente();
     } else {
       this.cargarForosAdmin();
-    }
   }
+}
 
   cargarForosPaciente(): void {
-    const userId = Number(this.userService.getIdLogeado());
-    this.pacienteService.findByUserId(userId).subscribe({
-      next: (paciente) => {
-        if (paciente.id) {
-          this.foroService.listByPacienteId(paciente.id).subscribe({
-            next: (data) => {
-              this.foros = data;
-            },
-            error: (err) => console.error('Error al cargar foros', err)
-          });
-        }
-      },
-      error: (err) => {
-        if (err.status === 404) {
-          console.warn('Perfil de paciente no encontrado. Contacta al administrador.');
-          this.foros = [];
-        } else {
-          console.error('Error al obtener paciente', err);
-        }
-      }
-    });
-  }
+  const userId = Number(this.userService.getIdLogeado());
 
-  cargarForosAdmin(): void {
-    this.foroService.listAll().subscribe({
-      next: (foros) => {
-        this.tipoDiscapacidadService.listAll().subscribe({
-          next: (tipos) => {
-            this.foros = foros.map(f => ({
-              ...f,
-              nombreTipo: tipos.find((t: TipoDiscapacidad) => t.id === f.tipoDiscapacidadId)?.nombre
-            }));
+  this.pacienteService.findByUserId(userId).subscribe({
+    next: (paciente) => {
+      if (paciente.id) {
+        this.foroService.listByPacienteId(paciente.id).subscribe({
+          next: (data) => {
+            this.foros = data;
+            this.cargando = false;
+            this.cdr.detectChanges();
           },
-          error: () => {
-            this.foros = foros;
+          error: (err) => {
+            console.error('Error al cargar foros', err);
+            this.foros = [];
+            this.cargando = false;
+            this.cdr.detectChanges();
           }
         });
-      },
-      error: (err) => console.error('Error al cargar foros', err)
-    });
-  }
+      } else {
+        this.foros = [];
+        this.cargando = false;
+        this.cdr.detectChanges();
+      }
+    },
+    error: (err) => {
+      if (err.status === 404) {
+        console.warn('Perfil de paciente no encontrado. Contacta al administrador.');
+      } else {
+        console.error('Error al obtener paciente', err);
+      }
+
+      this.foros = [];
+      this.cargando = false;
+      this.cdr.detectChanges();
+    }
+  });
+}
+  cargarForosAdmin(): void {
+  this.foroService.listAll().subscribe({
+    next: (foros) => {
+      this.tipoDiscapacidadService.listAll().subscribe({
+        next: (tipos) => {
+          this.foros = foros.map(f => ({
+            ...f,
+            nombreTipo: tipos.find((t: TipoDiscapacidad) => t.id === f.tipoDiscapacidadId)?.nombre
+          }));
+          this.cargando = false;
+          this.cdr.detectChanges();
+        },
+        error: () => {
+          this.foros = foros;
+          this.cargando = false;
+          this.cdr.detectChanges();
+        }
+      });
+    },
+    error: (err) => {
+      console.error('Error al cargar foros', err);
+      this.foros = [];
+      this.cargando = false;
+      this.cdr.detectChanges();
+    }
+  });
+}
 
   verPublicaciones(id: number): void {
     this.router.navigate(['/foros', id, 'publicaciones']);

@@ -33,6 +33,10 @@ import { AddForoComponent } from './components/foro/add-foro/add-foro';
 import { ListPublicacionComponent } from './components/publicacion/list-publicacion/list-publicacion';
 import { AddPublicacionComponent } from './components/publicacion/add-publicacion/add-publicacion';
 import { ListFisioterapeutaComponent } from './components/fisioterapeuta/list-fisioterapeuta/list-fisioterapeuta';
+import { ListAsignaciones } from './components/asignacion/list-asignaciones/list-asignaciones';
+import { ListEjercicios } from './components/ejercicio/list-ejercicios/list-ejercicios';
+import { AddEjercicio } from './components/ejercicio/add-ejercicio/add-ejercicio';
+import { RegistroUsuario } from './components/registro-usuario/registro-usuario';
 
 @NgModule({
   declarations: [
@@ -62,6 +66,10 @@ import { ListFisioterapeutaComponent } from './components/fisioterapeuta/list-fi
     AddForoComponent,
     ListPublicacionComponent,
     AddPublicacionComponent,
+    ListAsignaciones,
+    ListEjercicios,
+    AddEjercicio,
+    RegistroUsuario,
   ],
   imports: [
     BrowserModule,

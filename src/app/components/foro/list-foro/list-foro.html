@@ -1,12 +1,15 @@
 <div class="page-wrapper">
   <div class="card-header-row">
+    <p class="empty-row" *ngIf="cargando">
+      Cargando información...
+    </p>
     <h2 class="page-title">Foros</h2>
     <div class="header-actions" *ngIf="rol === 'ROLE_ADMIN'">
       <a routerLink="/foros/agregar" class="btn btn-primary">+ Nuevo Foro</a>
     </div>
   </div>
 
-  <div class="table-wrapper" *ngIf="rol === 'ROLE_PACIENTE'">
+  <div class="table-wrapper" *ngIf="rol === 'ROLE_PACIENTE' && !cargando">
     <table class="data-table">
       <thead>
         <tr>
@@ -36,7 +39,7 @@
     </table>
   </div>
 
-  <div class="table-wrapper" *ngIf="rol !== 'ROLE_PACIENTE'">
+  <div class="table-wrapper" *ngIf="rol !== 'ROLE_PACIENTE' && !cargando">
     <table class="data-table">
       <thead>
         <tr>

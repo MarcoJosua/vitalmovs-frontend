@@ -43,4 +43,8 @@ export class FisioterapeutaService {
       return this.http.get<Fisioterapeuta>(`${this.baseUrl}/fisioterapeuta/user/${userId}`
     );
   }
+  
+  findCompatiblesByPacienteId(pacienteId: number): Observable<Fisioterapeuta[]> {
+  return this.http.get<Fisioterapeuta[]>(`${this.baseUrl}/fisioterapeuta/compatibles/paciente/${pacienteId}`);
+}
 }

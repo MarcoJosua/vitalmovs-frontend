@@ -26,11 +26,15 @@ import { ListForoComponent } from './components/foro/list-foro/list-foro';
 import { AddForoComponent } from './components/foro/add-foro/add-foro';
 import { ListPublicacionComponent } from './components/publicacion/list-publicacion/list-publicacion';
 import { AddPublicacionComponent } from './components/publicacion/add-publicacion/add-publicacion';
-
+import { ListAsignaciones } from './components/asignacion/list-asignaciones/list-asignaciones';
+import { RegistroUsuario } from './components/registro-usuario/registro-usuario';
+import { ListEjercicios } from './components/ejercicio/list-ejercicios/list-ejercicios';
+import { AddEjercicio } from './components/ejercicio/add-ejercicio/add-ejercicio';
 
 const routes: Routes = [
   {path: "", component:Login},
   {path: "login", component:Login},
+  {path: "registro-usuario", component: RegistroUsuario},
   {path: "home", component:Home, canActivate:[consultarGuard]},
   {path: "plan-rehabilitacion/list-planes", component:ListPlanes, canActivate:[consultarGuard]},
   {path: 'plan-rehabilitacion/agregar/:asignacionId', component: AddPlanes, canActivate:[grabarGuard]},
@@ -44,17 +48,26 @@ const routes: Routes = [
   {path: 'tipo-discapacidad/list-tipos', component: ListTipoDiscapacidadComponent, canActivate:[consultarGuard]},
   {path: 'tipo-discapacidad/agregar', component: AddTipoDiscapacidadComponent, canActivate:[grabarGuard]},
   {path: 'tipo-discapacidad/editar/:tipoDiscapacidadId', component: AddTipoDiscapacidadComponent, canActivate:[grabarGuard]},
+  {path: 'ejercicio/list-ejercicios', component: ListEjercicios, canActivate:[consultarGuard]},
+  {path: 'ejercicio/agregar', component: AddEjercicio, canActivate:[grabarGuard]},
+  {path: 'ejercicio/editar/:ejercicioId', component: AddEjercicio, canActivate:[grabarGuard]},
   {path: 'paciente/list-pacientes', component: ListPacienteComponent, canActivate:[consultarGuard]},
   {path: 'paciente/agregar', component: AddPacienteComponent, canActivate:[grabarGuard]},
+  {path: 'paciente/agregar/:userId', component: AddPacienteComponent},
   {path: 'paciente/editar/:pacienteId', component: AddPacienteComponent, canActivate:[grabarGuard]},
   {path: 'paciente/:pacienteId/discapacidad', component: ListPacienteDiscapacidadComponent, canActivate:[consultarGuard]},
+  {path: 'paciente/:pacienteId/discapacidad/agregar/registro', component: AddPacienteDiscapacidadComponent},
+  {path: 'paciente/:pacienteId/discapacidad/agregar/perfil', component: AddPacienteDiscapacidadComponent, canActivate:[consultarGuard]},
   {path: 'paciente/:pacienteId/discapacidad/agregar', component: AddPacienteDiscapacidadComponent, canActivate:[grabarGuard]},
   {path: 'paciente/:pacienteId/discapacidad/editar/:pacienteDiscapacidadId', component: AddPacienteDiscapacidadComponent, canActivate:[grabarGuard]},
   {path: 'fisioterapeuta/list-fisioterapeutas', component: ListFisioterapeutaComponent, canActivate: [consultarGuard]},
   {path: 'fisioterapeuta/agregar', component: AddFisioterapeutaComponent, canActivate: [grabarGuard]},
+  {path: 'fisioterapeuta/agregar/:userId', component: AddFisioterapeutaComponent},
   {path: 'fisioterapeuta/editar/:fisioterapeutaId', component: EditFisioterapeutaComponent, canActivate: [grabarGuard]},
   {path: 'fisioterapeuta/buscar', component: BuscarFisioterapeutaComponent, canActivate: [consultarGuard]},
   {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad', component: ListFisioDiscapacidadComponent, canActivate: [consultarGuard]},
+  {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad/agregar/registro', component: AddFisioDiscapacidadComponent},
+  {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad/agregar/perfil', component: AddFisioDiscapacidadComponent, canActivate:[consultarGuard]},
   {path: 'fisioterapeuta/:fisioterapeutaId/discapacidad/agregar', component: AddFisioDiscapacidadComponent, canActivate: [grabarGuard]},
   {path: 'foros/list-foros', component: ListForoComponent, canActivate: [consultarGuard]},
   {path: 'foros/agregar', component: AddForoComponent, canActivate: [grabarGuard]},
@@ -62,7 +75,7 @@ const routes: Routes = [
   {path: 'foros/:foroId/publicaciones', component: ListPublicacionComponent, canActivate: [consultarGuard]},
   {path: 'foros/:foroId/publicaciones/agregar', component: AddPublicacionComponent, canActivate: [grabarGuard]},
   {path: 'foros/:foroId/publicaciones/editar/:publicacionId', component: AddPublicacionComponent, canActivate: [grabarGuard]},
-
+  {path: 'asignaciones/list-asignaciones', component: ListAsignaciones, canActivate: [consultarGuard]},
 
 ];
 

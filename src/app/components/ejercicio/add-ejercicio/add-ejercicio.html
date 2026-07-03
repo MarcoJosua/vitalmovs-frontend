@@ -1,0 +1,50 @@
+<div class="page-wrapper">
+  <div class="form-card">
+
+    <h2 class="form-title">
+      {{ modoEdicion ? 'Editar ejercicio' : 'Nuevo ejercicio' }}
+    </h2>
+
+    <p class="form-subtitle">
+      Registra el nombre y la descripción del ejercicio.
+    </p>
+
+    <p class="empty-row" *ngIf="cargando">
+      Cargando ejercicio...
+    </p>
+
+    <div *ngIf="!cargando">
+
+      <div class="form-group">
+        <label class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-input"
+          [(ngModel)]="ejercicio.nombre"
+          placeholder="Ej: Flexión de rodilla">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Descripción</label>
+        <textarea
+          class="form-input"
+          rows="4"
+          [(ngModel)]="ejercicio.descripcion"
+          placeholder="Describe cómo se realiza el ejercicio">
+        </textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="button" (click)="guardar()">
+          Guardar
+        </button>
+
+        <button class="btn btn-secondary" type="button" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

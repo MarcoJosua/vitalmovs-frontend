@@ -6,16 +6,20 @@
 
   <div class="search-row">
     <mat-icon class="search-icon">search</mat-icon>
+
     <input
       class="search-input"
       type="text"
-      placeholder="Buscar por nombre o apellido..."
+      placeholder="Buscar por nombre, apellido o especialidad..."
       [(ngModel)]="textoBusqueda"
-      (input)="buscar()"
-    />
+      (input)="buscar()">
   </div>
 
-  <table class="data-table">
+  <p class="empty-row" *ngIf="cargando">
+    Cargando fisioterapeutas...
+  </p>
+
+  <table class="data-table" *ngIf="!cargando">
     <thead>
       <tr>
         <th>ID</th>
@@ -25,6 +29,7 @@
         <th>Acciones</th>
       </tr>
     </thead>
+
     <tbody>
       <tr *ngFor="let f of fisioterapeutasFiltrados">
         <td>{{ f.id }}</td>
@@ -32,13 +37,16 @@
         <td>{{ f.apellido }}</td>
         <td>{{ f.especialidad }}</td>
         <td>
-          <button class="btn-discapacidad" (click)="verDiscapacidades(f.id!)">
+          <button class="btn btn-info" type="button" (click)="verDiscapacidades(f.id!)">
             Ver discapacidades
           </button>
         </td>
       </tr>
+
       <tr *ngIf="fisioterapeutasFiltrados.length === 0">
-        <td colspan="5" class="empty-row">No hay fisioterapeutas registrados.</td>
+        <td colspan="5" class="empty-row">
+          No hay fisioterapeutas registrados.
+        </td>
       </tr>
     </tbody>
   </table>

@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Paciente } from '../../../models/pacienteDTO';
 import { PacienteService } from '../../../services/paciente-services';
-
 
 @Component({
   selector: 'app-list-paciente',
@@ -11,12 +10,14 @@ import { PacienteService } from '../../../services/paciente-services';
   styleUrls: ['./list-paciente.css']
 })
 export class ListPacienteComponent implements OnInit {
+
   pacientes: Paciente[] = [];
   columnas: string[] = ['id', 'nombre', 'apellido', 'edad', 'sexo', 'acciones'];
 
   constructor(
     private pacienteService: PacienteService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -25,24 +26,40 @@ export class ListPacienteComponent implements OnInit {
 
   cargarPacientes(): void {
     this.pacienteService.listAll().subscribe({
-      next: (data) => this.pacientes = data,
-      error: (err) => console.error('Error al cargar pacientes', err)
+      next: (data) => {
+        this.pacientes = [...data];
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error al cargar pacientes', err);
+        this.pacientes = [];
+        this.cdr.detectChanges();
+      }
     });
   }
 
   buscar(event: Event): void {
     const texto = (event.target as HTMLInputElement).value.trim();
+
     if (texto === '') {
       this.cargarPacientes();
-    } else {
-      this.pacienteService.buscarPorNombre(texto).subscribe({
-        next: (data) => this.pacientes = data,
-        error: (err) => console.error('Error al buscar', err)
-      });
+      return;
     }
+
+    this.pacienteService.buscarPorNombre(texto).subscribe({
+      next: (data) => {
+        this.pacientes = [...data];
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Error al buscar pacientes', err);
+        this.pacientes = [];
+        this.cdr.detectChanges();
+      }
+    });
   }
 
   verDiscapacidades(id: number): void {
-    this.router.navigate(['/pacientes', id, 'discapacidades']);
+    this.router.navigate(['/paciente', id, 'discapacidad']);
   }
 }
