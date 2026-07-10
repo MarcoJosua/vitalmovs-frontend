@@ -25,37 +25,43 @@ export class AddTipoDiscapacidadComponent implements OnInit {
       descripcion: ['', Validators.required]
     });
   }
-
-  ngOnInit(): void {
-    const paramId = this.route.snapshot.paramMap.get('id');
-    if (paramId) {
-      this.id = Number(paramId);
-      this.tipoDiscapacidadService.listAll().subscribe(tipos => {
-        const tipo = tipos.find(t => t.id === this.id);
+ngOnInit(): void {
+  const paramId = this.route.snapshot.paramMap.get('id');
+  if (paramId) {
+    this.id = Number(paramId);
+    this.tipoDiscapacidadService.listAll().subscribe({
+      next: (tipos) => {
+        console.log('tipos:', tipos);
+        console.log('buscando id:', this.id);
+        
+        const tipo = tipos.find(t => Number(t.id) === Number(this.id));
+        console.log('tipo encontrado:', tipo);
         if (tipo) {
           this.form.patchValue(tipo);
         }
-      });
-    }
+      },
+      error: (err) => console.error('Error al cargar tipo', err)
+    });
   }
+}
 
   guardar(): void {
     if (this.form.invalid) return;
 
     if (this.id) {
       this.tipoDiscapacidadService.update({ id: this.id, ...this.form.value }).subscribe({
-        next: () => this.router.navigate(['/tipos-discapacidad']),
+        next: () => this.router.navigate(['/tipo-discapacidad/list-tipos']), 
         error: (err) => console.error('Error al actualizar', err)
       });
     } else {
       this.tipoDiscapacidadService.add(this.form.value).subscribe({
-        next: () => this.router.navigate(['/tipos-discapacidad']),
+        next: () => this.router.navigate(['/tipo-discapacidad/list-tipos']), 
         error: (err) => console.error('Error al crear', err)
       });
     }
   }
 
   cancelar(): void {
-    this.router.navigate(['/tipos-discapacidad']);
+    this.router.navigate(['/tipo-discapacidad/list-tipos']); 
   }
 }
