@@ -15,15 +15,15 @@ export class TipoDiscapacidadService {
   }
 
   add(tipo: TipoDiscapacidad): Observable<TipoDiscapacidad> {
-    return this.http.post<TipoDiscapacidad>(`${this.baseUrl}/TipoDiscapacidad`, tipo);
+    return this.http.post<TipoDiscapacidad>(`${this.baseUrl}/tipoDiscapacidad`, tipo);
   }
 
   update(tipo: TipoDiscapacidad): Observable<TipoDiscapacidad> {
-    return this.http.put<TipoDiscapacidad>(`${this.baseUrl}/TipoDiscapacidad`, tipo);
+    return this.http.put<TipoDiscapacidad>(`${this.baseUrl}/tipoDiscapacidad`, tipo);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/TipoDiscapacidad/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/tipoDiscapacidad/${id}`);
   }
 
   buscarPorNombre(nombre: string): Observable<TipoDiscapacidad[]> {

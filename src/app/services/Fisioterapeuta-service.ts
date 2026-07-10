@@ -38,13 +38,13 @@ export class FisioterapeutaService {
     const params = new HttpParams().set('especialidad', especialidad);
     return this.http.get<Fisioterapeuta[]>(`${this.baseUrl}/fisioterapeuta/especialidad`, { params });
   }
+  
+  findCompatiblesByPacienteId(pacienteId: number): Observable<Fisioterapeuta[]> {
+    return this.http.get<Fisioterapeuta[]>(`${this.baseUrl}/fisioterapeuta/compatibles/paciente/${pacienteId}`);
+  }
 
   findByUserId(userId: number) {
       return this.http.get<Fisioterapeuta>(`${this.baseUrl}/fisioterapeuta/user/${userId}`
     );
   }
-  
-  findCompatiblesByPacienteId(pacienteId: number): Observable<Fisioterapeuta[]> {
-  return this.http.get<Fisioterapeuta[]>(`${this.baseUrl}/fisioterapeuta/compatibles/paciente/${pacienteId}`);
-}
 }

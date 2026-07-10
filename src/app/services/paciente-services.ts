@@ -15,15 +15,15 @@ export class PacienteService {
   }
 
   add(paciente: Paciente): Observable<Paciente> {
-    return this.http.post<Paciente>(`${this.baseUrl}/Paciente`, paciente);
+    return this.http.post<Paciente>(`${this.baseUrl}/paciente`, paciente);
   }
 
   update(paciente: Paciente): Observable<Paciente> {
-    return this.http.put<Paciente>(`${this.baseUrl}/Paciente`, paciente);
+    return this.http.put<Paciente>(`${this.baseUrl}/paciente`, paciente);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/Paciente/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/paciente/${id}`);
   }
 
   buscarPorNombre(nombre: string): Observable<Paciente[]> {
