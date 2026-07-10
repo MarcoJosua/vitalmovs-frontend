@@ -39,6 +39,7 @@ export class AddFisioterapeutaComponent implements OnInit {
   ngOnInit(): void {
     const userIdParam = this.route.snapshot.paramMap.get('userId');
 
+
     if (userIdParam) {
       this.modoRegistro = true;
       this.fisioterapeuta.userId = Number(userIdParam);

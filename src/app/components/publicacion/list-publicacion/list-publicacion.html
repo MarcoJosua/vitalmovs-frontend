@@ -36,7 +36,7 @@
         <div class="comentario-vacio" *ngIf="!comentarios[p.id!] || comentarios[p.id!].length === 0">
           <p>Sin comentarios</p>
         </div>
-        <div class="comentario-form">
+        <div class="comentario-form" *ngIf="rol !== 'ROLE_ADMIN'">
           <input type="text" class="form-input" [(ngModel)]="nuevoComentario[p.id!]" placeholder="Escribe un comentario..." (keyup.enter)="agregarComentario(p.id!)">
           <button class="btn btn-primary btn-small" (click)="agregarComentario(p.id!)">Comentar</button>
         </div>

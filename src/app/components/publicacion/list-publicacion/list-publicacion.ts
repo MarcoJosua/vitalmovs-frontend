@@ -61,12 +61,16 @@ export class ListPublicacionComponent implements OnInit {
     });
   }
 
-  cargarComentarios(publicacionId: number): void {
+    cargarComentarios(publicacionId: number): void {
     this.comentarioService.listByPublicacionId(publicacionId).subscribe({
       next: (data) => {
         this.comentarios[publicacionId] = data;
+
+        this.cdr.markForCheck();
       },
-      error: (err) => console.error('Error al cargar comentarios', err)
+      error: (err) => {
+        console.error('Error al cargar comentarios', err);
+      }
     });
   }
 

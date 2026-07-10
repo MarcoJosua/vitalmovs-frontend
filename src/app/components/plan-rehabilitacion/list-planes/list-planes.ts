@@ -124,7 +124,7 @@ export class ListPlanes {
 
   editarPlan(planId: number): void {
   this.router.navigate(['/plan-rehabilitacion/editar', planId]);
-}
+  }
 
   cancelarPlan(plan: PlanRehabilitacionDTO): void {
 

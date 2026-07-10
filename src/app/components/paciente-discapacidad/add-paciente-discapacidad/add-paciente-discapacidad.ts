@@ -135,7 +135,7 @@ export class AddPacienteDiscapacidadComponent implements OnInit {
     if (this.modoRegistro) {
       this.router.navigate(['/login']);
     } else {
-      this.router.navigate(['/paciente', this.pacienteId, 'discapacidad']);
+      this.router.navigate(['/home']);
     }
   }
 
@@ -147,7 +147,7 @@ export class AddPacienteDiscapacidadComponent implements OnInit {
   if (this.modoRegistro) {
     this.router.navigate(['/login']);
   } else {
-    this.router.navigate(['/paciente', this.pacienteId, 'discapacidad']);
+    this.router.navigate(['/home']);
   }
 }
 }

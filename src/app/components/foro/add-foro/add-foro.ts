@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Foro } from '../../../models/ForoDTO';
 import { ForoService } from '../../../services/foro-service';
@@ -26,13 +26,20 @@ export class AddForoComponent implements OnInit {
     private foroService: ForoService,
     private tipoDiscapacidadService: TipoDiscapacidadService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
     this.tipoDiscapacidadService.listAll().subscribe({
-      next: (data) => this.tipos = data,
-      error: (err) => console.error('Error al cargar tipos', err)
+      next: (data) => {
+        this.tipos = data;
+
+        this.cdr.markForCheck();
+      },
+      error: (err) => {
+        console.error('Error al cargar tipos', err);
+      }
     });
 
     const foroId = this.route.snapshot.paramMap.get('foroId');
@@ -43,6 +50,7 @@ export class AddForoComponent implements OnInit {
           const encontrado = data.find(f => f.id === Number(foroId));
           if (encontrado) {
             this.foro = encontrado;
+            this.cdr.markForCheck();
           }
         },
         error: (err) => console.error('Error al cargar foro', err)
