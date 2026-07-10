@@ -1,24 +1,44 @@
-<h2>VitalMovs</h2>
-<form  [formGroup]="loginForm">
+<div class="login-wrapper">
+  <!-- Lado izquierdo: imagen/visual -->
+  <div class="login-left">
+    <div class="login-left-content">
+      <img src="logo-vitalmovs.png" alt="VitalMovs Logo" class="login-logo-big">
+      <h1>VitalMovs</h1>
+      <p>Plataforma de rehabilitación física personalizada</p>
+    </div>
+  </div>
 
-    <mat-form-field>
-        <mat-label>Usuario</mat-label>
-        <input matInput formControlName="username">
+  <!-- Lado derecho: formulario -->
+  <div class="login-right">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="logo-vitalmovs.png" alt="Logo" class="login-logo-small">
+        <h2>Bienvenido</h2>
+        <p>Ingresa tus credenciales para continuar</p>
+      </div>
+
+      <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline" class="campo-completo">
+          <mat-label>Usuario</mat-label>
+          <input matInput formControlName="username" placeholder="Tu usuario">
+          <mat-icon matSuffix>person</mat-icon>
         </mat-form-field>
-    <br>
-    <br>
-        <mat-form-field>
-        <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="password" type="password">
+
+        <mat-form-field appearance="outline" class="campo-completo">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" type="password" placeholder="Tu contraseña">
+          <mat-icon matSuffix>lock</mat-icon>
         </mat-form-field>
-    <br>
-    <br>
-<button matButton="filled" type="button" (click)="Login()">Ingresar</button>
 
-    <br>
-    <br>
+        <button class="btn-ingresar" type="button" (click)="Login()">
+          Ingresar
+        </button>
 
-<button matButton="outlined" type="button" routerLink="/registro-usuario">
-  Crear usuario
-</button>
-</form>
+        <div class="login-footer">
+          <span>¿No tienes cuenta?</span>
+          <a routerLink="/registro-usuario">Crear usuario</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
