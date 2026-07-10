@@ -45,10 +45,6 @@ export class EstadisticaService {
     return this.http.get<EstadisticaGraficoDTO>(this.ruta_servidor + "/" + this.recurso + "/dashboard/resumen/" + planId.toString());
   }
 
-  evolucionPorFecha(planId: number) {
-    return this.http.get<EstadisticaGraficoDTO[]>(this.ruta_servidor + "/" + this.recurso + "/dashboard/evolucion/" + planId.toString());
-  }
-
   resumenPorEjercicio(planId: number) {
     return this.http.get<EstadisticaGraficoDTO[]>(this.ruta_servidor + "/" + this.recurso + "/dashboard/ejercicios/" + planId.toString());
   }
