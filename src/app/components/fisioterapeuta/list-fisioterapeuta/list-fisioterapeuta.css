@@ -59,7 +59,7 @@
 }
 
 .data-table thead tr {
-  background-color: #1e293b;
+  background-color: #4b0872;
   color: white;
 }
 
@@ -94,17 +94,17 @@
 }
 
 .btn-info {
-  background-color: #e0f2fe;
-  color: #0369a1;
+  background-color: #f4dafa;
+  color: #70009c;
 }
 
 .btn-info:hover {
-  background-color: #bae6fd;
+  background-color: #e9a4fa;
 }
 
 .empty-row {
   text-align: center;
-  color: #94a3b8;
+  color: #eb9cff;
   padding: 1.5rem;
   font-style: italic;
 }

@@ -28,7 +28,7 @@
 }
 
 .data-table thead tr {
-  background-color: #1e293b;
+  background-color: #4b0872;
   color: white;
 }
 
@@ -64,35 +64,35 @@
 }
 
 .btn-primary {
-  background-color: #3b82f6;
+  background-color: #7608c0;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #2563eb;
+  background-color: #4b0872;
 }
 
 .btn-edit {
-  background-color: #f59e0b;
+  background-color: #c06df8;
   color: white;
 }
 
 .btn-edit:hover {
-  background-color: #d97706;
+  background-color: #ac46f0;
 }
 
 .btn-danger {
-  background-color: #ef4444;
+  background-color: #7608c0;
   color: white;
 }
 
 .btn-danger:hover {
-  background-color: #dc2626;
+  background-color: #4b0872;
 }
 
 .empty-row {
   text-align: center;
-  color: #94a3b8;
+  color: #eb9cff;
   padding: 1.5rem;
   font-style: italic;
 }

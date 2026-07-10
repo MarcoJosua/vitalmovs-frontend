@@ -35,12 +35,12 @@
 }
 
 .btn-primary {
-  background-color: #3b82f6;
+  background-color: #7608c0;
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #2563eb;
+  background-color: #4b0872;
 }
 
 .table-wrapper {
@@ -57,7 +57,7 @@
 }
 
 .data-table thead tr {
-  background-color: #1e293b;
+  background-color: #4b0872;
   color: white;
 }
 

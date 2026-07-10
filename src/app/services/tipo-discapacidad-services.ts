@@ -1,40 +1,63 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { TipoDiscapacidad } from '../models/tipodiscapacidadDTO';
 
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class TipoDiscapacidadService {
-  private baseUrl = 'http://localhost:8080/vitalmovs';
+
+  private readonly baseUrl = 'http://localhost:8080/vitalmovs';
+  private readonly recursoUrl =
+    `${this.baseUrl}/tipoDiscapacidad`;
 
   constructor(private http: HttpClient) {}
 
   listAll(): Observable<TipoDiscapacidad[]> {
-    return this.http.get<TipoDiscapacidad[]>(`${this.baseUrl}/tipoDiscapacidad/tipos`);
+    return this.http.get<TipoDiscapacidad[]>(
+      `${this.recursoUrl}/tipos`
+    );
   }
 
-  add(tipo: TipoDiscapacidad): Observable<TipoDiscapacidad> {
-    return this.http.post<TipoDiscapacidad>(`${this.baseUrl}/TipoDiscapacidad`, tipo, httpOptions);
+  add(
+    tipo: TipoDiscapacidad
+  ): Observable<TipoDiscapacidad> {
+    return this.http.post<TipoDiscapacidad>(
+      this.recursoUrl,
+      tipo
+    );
   }
 
-  update(tipo: TipoDiscapacidad): Observable<TipoDiscapacidad> {
-    return this.http.put<TipoDiscapacidad>(`${this.baseUrl}/TipoDiscapacidad`, tipo, httpOptions);
+  update(
+    tipo: TipoDiscapacidad
+  ): Observable<TipoDiscapacidad> {
+    return this.http.put<TipoDiscapacidad>(
+      this.recursoUrl,
+      tipo
+    );
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/TipoDiscapacidad/${id}`);
+    return this.http.delete<void>(
+      `${this.recursoUrl}/${id}`
+    );
   }
 
-  buscarPorNombre(nombre: string): Observable<TipoDiscapacidad[]> {
-    return this.http.get<TipoDiscapacidad[]>(`${this.baseUrl}/tipoDiscapacidad/buscarNombre/${nombre}`);
+  buscarPorNombre(
+    nombre: string
+  ): Observable<TipoDiscapacidad[]> {
+    return this.http.get<TipoDiscapacidad[]>(
+      `${this.recursoUrl}/buscarNombre/${encodeURIComponent(nombre)}`
+    );
   }
 
-  buscarPorDescripcion(keyword: string): Observable<TipoDiscapacidad[]> {
-    return this.http.get<TipoDiscapacidad[]>(`${this.baseUrl}/tipoDiscapacidad/buscarDescripcion/${keyword}`);
+  buscarPorDescripcion(
+    keyword: string
+  ): Observable<TipoDiscapacidad[]> {
+    return this.http.get<TipoDiscapacidad[]>(
+      `${this.recursoUrl}/buscarDescripcion/${encodeURIComponent(keyword)}`
+    );
   }
 }
