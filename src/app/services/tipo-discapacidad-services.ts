@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TipoDiscapacidad } from '../models/tipodiscapacidadDTO';
 
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({ providedIn: 'root' })
 export class TipoDiscapacidadService {
@@ -15,15 +19,15 @@ export class TipoDiscapacidadService {
   }
 
   add(tipo: TipoDiscapacidad): Observable<TipoDiscapacidad> {
-    return this.http.post<TipoDiscapacidad>(`${this.baseUrl}/tipoDiscapacidad`, tipo);
+    return this.http.post<TipoDiscapacidad>(`${this.baseUrl}/TipoDiscapacidad`, tipo, httpOptions);
   }
 
   update(tipo: TipoDiscapacidad): Observable<TipoDiscapacidad> {
-    return this.http.put<TipoDiscapacidad>(`${this.baseUrl}/tipoDiscapacidad`, tipo);
+    return this.http.put<TipoDiscapacidad>(`${this.baseUrl}/TipoDiscapacidad`, tipo, httpOptions);
   }
 
   delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/tipoDiscapacidad/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/TipoDiscapacidad/${id}`);
   }
 
   buscarPorNombre(nombre: string): Observable<TipoDiscapacidad[]> {
