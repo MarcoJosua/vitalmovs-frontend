@@ -1,5 +1,5 @@
 export interface TipoDiscapacidad {
-  id: number;
+  id?: number;
   nombre: string;
   descripcion: string;
 }
